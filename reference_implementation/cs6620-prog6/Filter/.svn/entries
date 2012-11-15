@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="24"
+   name=""
+   committed-date="2005-02-23T16:18:30.095911Z"
+   url="svn://taz.sci.utah.edu/cs6620/branches/prog6/Filter"
+   last-author="sparker"
+   kind="dir"
+   uuid="d05ff4f9-b8ef-0310-9733-ee85d60669cc"
+   revision="54"/>
+<entry
+   committed-rev="23"
+   name="TriangleKernel1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="b28e14b9926ecb6f78b1fe0d3e50b5b5"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="GaussianKernel1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="6738f7e87c28deb1253bf74d0cb94d9a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="BoxWindow1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="dc07c80f75180cd6747c7884299efb1d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="20"
+   name="Filter1D.cc"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-17T17:00:58.714271Z"
+   checksum="d39a7204db352a4c7f445067f5d1d65a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filters.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="453f40ddf85fa7aba3222fba5c233f88"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filter2D.cc"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="c84b2c0013ea6939ab3c9dee5b1b4a89"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filter1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="3f2c2cfca4bfeb0fab178099712030f3"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filter1DWrapper.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="f1f20263c53f9eeda9a8b6709317078e"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filter2D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="306cfb4c3e46fc8ea25147030ce2047b"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="FilterFactory.cc"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="70b0a7acec20234cce937dd006320057"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Filter2DWrapper.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="409149200be3f5fed12f3c42cd3bcd04"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="20"
+   name="FilterFactory.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-17T17:00:58.714271Z"
+   checksum="36af521cab3cbfcd85ba1c14aa928162"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="BoxKernel1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="4b93dec846838c185c89b97abdf91f8f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="SincKernel1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="b2f49642ce88393a2433471ce8bea31b"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="RadialKernel2D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="f6a75f29fd109a17512e698280b1b0ee"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="SeparableKernel2D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="2f78ad05348742bac2b510795b1661cd"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="23"
+   name="LanczosWindow1D.h"
+   text-time="2005-03-20T22:20:17.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="19b44b49f1e128abc3839888802ba75c"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+</wc-entries>

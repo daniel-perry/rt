@@ -1,0 +1,13 @@
+The main program is called specere
+
+Program 3: Before you run specere with scenes/req3.h, you must do:
+  genheightfield 200 200 sinc_200_200.hf
+
+Program 4: To get the required image, change line 132 in DielectricMaterial.cc
+  from:
+    if(/* !exiting && */ cosphi > 0){
+  to:
+    if(!exiting && cosphi > 0){
+
+  The original implementation did not correctly calculate phong highlights
+  for rays exiting a surface

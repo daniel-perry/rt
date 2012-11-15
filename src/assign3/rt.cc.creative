@@ -1,0 +1,211 @@
+/* Daniel Perry
+ * Spring 05 - for cs6620
+ * ray tracer - started 24 Jan 05
+ *
+ */
+
+#include <iostream>
+#include <vector>
+
+#include "gl/hpoint.h"
+#include "gl/image.h"
+#include "gl/ray.h"
+#include "gl/rgb.h"
+#include "gl/vector3d.h"
+//#include "gl/sphere.h"
+//#include "gl/surface.h"
+
+#include "gl/Scene.h"
+#include "gl/Sphere.h"
+#include "gl/Triangle.h"
+#include "gl/Disk.h"
+#include "gl/Ring.h"
+#include "gl/AxisBox.h"
+#include "gl/HeightField.h"
+#include "gl/LambertianMaterial.h"
+#include "gl/Camera.h"
+#include "gl/Light.h"
+#include "gl/DirectionalLight.h"
+#include "gl/PointLight.h"
+#include "gl/ConstantBackground.h"
+#include "gl/PinholeCamera.h"
+#include "gl/Background.h"
+#include "gl/Object.h"
+#include "gl/Material.h"
+#include "gl/Group.h"
+#include "gl/Plane.h"
+
+#include "gl/Time.h"
+#include "gl/util.h"
+
+using namespace std;
+#include <fstream>
+
+int main(int args, char * argv[] )
+{
+
+  if( args != 2 ){
+    cerr<<"usage: "<<argv[0]<<" outfilename"<<endl;
+    exit(1);
+  }
+
+  ofstream out(argv[1]);
+
+  if(!out){
+    cerr<<"Couldn't open "<<argv[1]<<endl;
+    exit(1);
+  }
+
+  Time time;
+  time.initialize();
+  double setupt,render,finalize;
+
+  int yres=512,xres=512;
+  
+  
+  image THEIMAGE(xres,yres);
+
+  Group gr;
+  
+
+
+  //LambertianMaterial lm4( rgb(.3,.8,.8) , .6 , .4 );
+  //Plane plane( vector3d(0,1,0) , vector3d(0,-.1,0) , &lm4);
+  //gr.add(& plane);
+
+  /*
+  LambertianMaterial sphere_mat( rgb( .9, .3, .3) , .6 , .4 );
+  Sphere sphere( vector3d( 0 , 0, 0 ) , .4 , &sphere_mat );
+  //gr.add( & sphere );
+
+  LambertianMaterial tri_mat( rgb( .3,.9,.3) , .6 , .4);
+  Triangle triangle( vector3d( 3 , 10 , 12 ), vector3d( -2 , 10 , 16 ) , vector3d( 0 , 15 , 14 ) , & tri_mat );
+  //gr.add( & triangle);
+  
+  LambertianMaterial disk_mat( rgb( .3,.3,.9) , .6 ,.4 );
+  Disk disk( vector3d( 0 , 8 , 14 ) , vector3d( 0 , 0 , -1 ) , 1.9 , & disk_mat );
+  //gr.add( & disk );
+
+  LambertianMaterial ring_mat( rgb( .3,.9,.9) , .6 , .4 );
+  Ring ring( vector3d( 0 , 6 , 12 ) , vector3d( 0, 0 , -1) ,  1.0 , 1.7 , & ring_mat );
+  //gr.add( & ring );
+
+  LambertianMaterial box_mat( rgb (.9,.9,.3 ) , .6 , .4 );
+  AxisBox box( vector3d( -2 , 7 , 10 ) , vector3d(2 , 9 , 12 ) , &box_mat);
+  //gr.add( & box);
+  */
+
+  float width = 1061*10, height = 1355*10;
+
+  LambertianMaterial hf_mat( rgb(.9,.5,.5) , .6 , .4 );
+  HeightField hf( vector3d( -width/2 , -height/2 , 2 ) , vector3d(width/2 , height/2 , 4 ) , "HALF_DOME.mds", &hf_mat);
+  gr.add(&hf);
+
+  //LambertianMaterial lm4( rgb(.3,.8,.8) , .6 , .4 );
+  Plane plane( vector3d(0,0,1) , vector3d(0,0,hf.Pmin.z()+.1) , &hf_mat);
+  gr.add(& plane);
+
+  LambertianMaterial sun_mat( rgb(.9,.9,.2) , .4 , .8 );
+  Disk sun( vector3d( 0 , 0 , 2000+300  ) , vector3d( -1 , -1 , 0 ) , 1000 , &sun_mat);
+  gr.add( &sun );
+
+  /*
+    either ufo's or pogo-balls
+  */
+
+  LambertianMaterial sph1_m( rgb( .3 , .3 , .9 ) , .6 , .4 );
+  Sphere ufo1( vector3d(  -width+2000+4000, -1900 , 2000 ) , 100 , &sph1_m );
+  gr.add( &ufo1 );
+  
+  Ring ufo1_wings( ufo1.center,vector3d(-.5,0,1) , 120 , 120+100 , &sph1_m );
+  gr.add( &ufo1_wings );
+  
+
+  LambertianMaterial sph2_m( rgb( .9 , .5 , .9 ) , .6 , .4 );
+  Sphere ufo2( vector3d(  ufo1.center.x() -500, ufo1.center.y()  , ufo1.center.z()-500 ) , 100 , &sph2_m );
+  gr.add( &ufo2 );
+  
+  Ring ufo2_wings( ufo2.center,vector3d(-.8,0,1) , 120 , 120+100 , &sph2_m );
+  gr.add( &ufo2_wings );
+
+  LambertianMaterial sph3_m( rgb( .5 , .9 , .5 ) , .6 , .4 );
+  Sphere ufo3( vector3d(  ufo1.center.x() -200, ufo1.center.y()+300  , ufo1.center.z()-300 ) , 100 , &sph3_m );
+  gr.add( &ufo3 );
+  
+  Ring ufo3_wings( ufo3.center,vector3d(-.8,0,1) , 120 , 120+100 , &sph3_m );
+  gr.add( &ufo3_wings );
+
+
+  LambertianMaterial box_m( rgb( .9 , .8 , .8 ) , .6 , .4 );
+  double temp1 =-width+2000+4000-1000 ,temp2 = -1900+1500;
+  AxisBox building1( vector3d(  temp1 , temp2  , plane.point.z()+.1 ) ,vector3d(  temp1+100 , temp2+100  , plane.point.z()+.1+500 ) , &box_m );
+  gr.add( &building1 );
+
+  double b2tmp1 = building1.bounds[0].x()-300, b2tmp2 = building1.bounds[0].y(), b2tmp3 = building1.bounds[0].z();
+  AxisBox building2( vector3d(  b2tmp1,b2tmp2,b2tmp3 ) ,vector3d(  b2tmp1+200 , b2tmp2+100  , b2tmp3+350 ) , &box_m );
+  gr.add( &building2 );
+
+  b2tmp1 = building1.bounds[0].x()-250; 
+  b2tmp2 = building1.bounds[0].y()-450; 
+  b2tmp3 = building1.bounds[0].z();
+  AxisBox building3( vector3d(  b2tmp1,b2tmp2,b2tmp3 ) ,vector3d(  b2tmp1+100 , b2tmp2+300  , b2tmp3+300 ) , &box_m );
+  gr.add( &building3 );
+
+  ///////////////// CAMERA AND LIGHTS: //////////////////
+
+
+  PinholeCamera cam( hpoint( -width+2000,-1000-900,1600+300), hpoint( 0,0,2000) , vector3d(0,0,1), /*0.52359878*/M_PI/180*35, 1 );
+
+  vector<Light *> lights;
+  /*
+  PointLight pl(rgb(.9,.9,.9),vector3d(0,5,10));
+  lights.push_back( &pl );
+  */
+  PointLight pl2( rgb(.9,.9,.9),vector3d(0,-width,height*2));
+  lights.push_back( &pl2 );
+  /*
+  PointLight pl3( rgb( .9,.9,.9) , vector3d(5,0,0) );
+  lights.push_back( &pl3 );
+  PointLight pl4( rgb( .9,.9,.9) , vector3d(-5,0,0) );
+  lights.push_back( &pl4 );
+  */
+
+  ConstantBackground bg( rgb(.1,.2,.3) );
+  
+  Scene scene( &gr , &cam, lights, rgb( .4 , .4 , .4) , & bg );
+
+  HitRecord hit;
+  RenderContext rc(scene);
+
+  setupt = time.currentSeconds();
+
+  for( int i=0; i<xres; i++ ){
+    for(int j=0; j<yres; j++){
+      double x = 2 * (i-xres/2. + .5 ) / xres;
+      double y = 2 * (j-yres/2. + .5 ) / yres;
+      ray r;
+      rgb clr;
+      scene.camera->makeRay( r , rc , x , y );
+      hit.t = MYMAX;
+      if(scene.object->intersect( hit , rc , r )){
+	hit.material->shade( clr , rc , r , hit , 0 );
+      }else{
+	scene.background->getBackgroundColor( clr , rc , r );
+      }
+      THEIMAGE.set( i , j , clr );
+    }
+  }
+  
+  render = time.currentSeconds();
+
+  THEIMAGE.writeppm( out );
+  
+  finalize = time.currentSeconds();
+
+  finalize -= (setupt+render);
+  render -= setupt;
+
+  cerr<<"setup: "<<setupt<<"\nrender: "<<render<<"\nfinalize: "<<finalize<<endl;
+
+  return 0;
+}

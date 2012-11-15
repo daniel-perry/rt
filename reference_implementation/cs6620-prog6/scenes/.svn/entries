@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="50"
+   name=""
+   committed-date="2005-03-19T02:57:48.318916Z"
+   url="svn://taz.sci.utah.edu/cs6620/branches/prog6/scenes"
+   last-author="sparker"
+   kind="dir"
+   uuid="d05ff4f9-b8ef-0310-9733-ee85d60669cc"
+   revision="54"/>
+<entry
+   committed-rev="8"
+   name="req2.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="eb33650eb99b2b16781268bc1768f0a9"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="13"
+   name="req3.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T04:16:06.088693Z"
+   checksum="b308eea461fb58ecdaf30c3e87dbe13b"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="18"
+   name="attenuation.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-14T16:51:07.412284Z"
+   checksum="accadd7a56a57fa7711b733e040c96bd"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="req4.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="91bf154997a4afe3a9728e1af42feaad"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="prog2metal.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="0abf10c526066b20ac1717cd2fc626de"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="27"
+   name="req5.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-25T11:11:55.459601Z"
+   checksum="0224ca376d08adef14f24eb3d653781e"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="50"
+   name="req6.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-03-19T02:57:48.318916Z"
+   checksum="cf25a78e0707dc371c457f9ee1a22b6f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="prog2phong.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="3f2b489d2144914ab5c7294f7b1956a9"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="14"
+   name="qaeb_scene.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T04:22:34.532551Z"
+   checksum="73f8dbd4f35a715b12a12eb1178a890d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="highlight_test.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="7912be93ff3b6839566eaf5e54a04e5b"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="prog2diel.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="260e3cb0c80b5835a1b4daf0fd20adb0"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="prog2orennayar.h"
+   text-time="2005-03-20T22:20:18.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="62ede6e38c6cd4cb2de70c227ee17969"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+</wc-entries>

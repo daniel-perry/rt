@@ -1,0 +1,15 @@
+------------------------
+     Assignment #2
+------------------------
+
+Programming language:   C++
+CPU(s):                 Intel Xeon (2)
+Clock rate:             3.0 GHz
+Thread count:           2
+Third party libraries:  none
+Compiler:               g++ 3.3.4 
+Compiler flags:         -O3 -msse -msse2 -mfpmath=sse -march=pentium4 -mtune=pentium4 \
+                        -malign-double -minline-all-stringops 
+Setup/load time:        5.41e-05 seconds
+Render time:            0.0391 seconds
+Post-process time:      0.00743 seconds

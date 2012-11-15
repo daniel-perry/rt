@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 82
+*.ppm
+req1
+info.h
+specere
+genheightfield
+sinc_200_200.hf
+filter_test
+filter_graph
+
+END

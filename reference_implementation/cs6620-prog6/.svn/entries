@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="50"
+   name=""
+   committed-date="2005-03-19T02:57:48.318916Z"
+   url="svn://taz.sci.utah.edu/cs6620/branches/prog6"
+   last-author="sparker"
+   kind="dir"
+   uuid="d05ff4f9-b8ef-0310-9733-ee85d60669cc"
+   prop-time="2005-03-20T22:20:18.000000Z"
+   revision="54"/>
+<entry
+   committed-rev="30"
+   name="Math.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="85a89167897a94f79966af407c70258b"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Point.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="25e15e200fcd24ab35ec169124b57aa1"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="16"
+   name="PhongMaterial.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="abf3d93a9ad938272de04bf5a9f5212a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="2"
+   name="Time.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-10T02:48:21.535468Z"
+   checksum="92f820e8b1d7ddbe1e3a76271180d89c"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="16"
+   name="Material.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="d1a75a640a90f667e8bce538eedf2156"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Object.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="6f43bd219ae7308db9bb4a74878a92da"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Primitive.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="238f99539514cc63129fef94b85eba42"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:15.000000Z"/>
+<entry
+   committed-rev="30"
+   name="OrenNayarMaterial.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="05fc66d5d3cd6b92521f20b9126ad0b6"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="BoundingBox.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="6bae589c0e872ac2a918ea3c220015f3"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="27"
+   name="Color.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-25T11:11:55.459601Z"
+   checksum="c37d7ebdef289ce583557ec75b8c323f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="PointLight.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="4f692435922b4e1866c53a2dcd84b338"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="27"
+   name="filter_test.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-25T11:11:55.459601Z"
+   checksum="0a6c212b51ec65e204b2ee704fb12c92"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="11"
+   name="HitRecord.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T04:13:16.394077Z"
+   checksum="803b6e6900102d17647d1c69d691aa6f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="16"
+   name="DielectricMaterial.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="d252f6e8a6223a3b70f1184f0a22cc37"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="ConstantBackground.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="85369d8f2f093c46324e3df40400b253"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="50"
+   name="Makefile"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-03-19T02:57:48.318916Z"
+   checksum="8be5b7384ffb7d7b74f107a6326bd0ea"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Disk.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="7fd3a5cef68d8e4add0c55976aadde6d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Camera.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="559fcc7eb2b4ce163363edd9f033e924"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Box.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="d839e77dc167073a66a0765490a57bb5"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Scene.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="1de1d9091d80869a16a8ebff61978a88"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Ray.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="40bae4d047941e6b21c45558a4482ec1"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Ring.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="72cf406834784b5323b6f180b2577d99"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="16"
+   name="LambertianMaterial.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="e025ff0811cb1790829beaf363a9af75"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Ring.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="99127feadea02b45453bb8d1e21eb42d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Vector.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="c1a7d2d72ff7cc1162f554a83b487daa"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="27"
+   name="Sampler.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-25T11:11:55.459601Z"
+   checksum="37c61e6f3dbcb7ffa25d36ac32373ba7"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="23"
+   name="filter_graph.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-23T16:17:18.884042Z"
+   checksum="862ed01a5971bf6b2a8f20293200c21f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="11"
+   name="genheightfield.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T04:13:16.394077Z"
+   checksum="d621821c6694d5e002998fd705569aef"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Triangle.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="13e83f812d1df0a8c1bdc667b44b94df"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Object.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="239791333b893fc708dcf7c1c4120f9a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="50"
+   name="GriddedGroup.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-03-19T02:57:48.318916Z"
+   checksum="a2f83f88b709a5331c7ea416dd43da91"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="BoundingBox.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="4e69c2a7ec48318663d0ed8b11739a3f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="31"
+   name="GriddedGroup.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-27T05:01:00.535247Z"
+   checksum="724f4338eaa7b1d6178882faaab4a581"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="16"
+   name="MetalMaterial.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="f0162b0d299d52a2dc31936d55760bf4"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="specere.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="db774f1b0b76cdef305076894a78a44c"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Sphere.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="02b80da7c5ef385ad2089176cce71435"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Box.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="b9387f91d3234259cb6aab6f7f16d84e"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Camera.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="20a25f7a10638f84afa4c44329f694ed"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Point.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="c22db34ebe3ea4a3a24fa0d1fd2c6cbb"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Disk.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="53770e199f000ff404a695ea3d398508"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Group.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="830787303f458a11ccd3a100da749a74"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Plane.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="83bd04cd83a01389acd57e455360f7a8"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:16.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Plane.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="896fb7961bd1b8a345d0d410d2180d72"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   name="Filter"
+   kind="dir"/>
+<entry
+   committed-rev="30"
+   name="Array3.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="7c917f32973c4e8187ba1e4f36cbd2c0"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Vector.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="6b8e062a11e19e6da7a9a4bf84c27400"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="8"
+   name="PinholeCamera.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="107ba1ab9c6b5d6d64b4c43934d4fded"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="2"
+   name="req1.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-10T02:48:21.535468Z"
+   checksum="15cdbaef2297575b2189d734915a091a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="8"
+   name="PinholeCamera.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="7e38cb3700168b396febc848f579c924"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:17.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Heightfield.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="517af53bcfdd12ebbc3833ef3204e71a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="OrenNayarMaterial.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="5d8f60cb08b5f401fce4fae14b85c2a4"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="2"
+   name="Image.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-10T02:48:21.535468Z"
+   checksum="64561c903a18bdf18ef5ed71385da778"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="PointLight.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="c1f2bb700c931d36cca05dfb01be87f7"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="RenderContext.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="23e36424f0a5d51d3c226e994a8a9766"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Sphere.h"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="914350211ed69215c06cefd15cb85788"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="29"
+   name="PhongMaterial.cc"
+   text-time="2005-03-20T22:20:19.000000Z"
+   committed-date="2005-02-26T05:16:45.399768Z"
+   checksum="7f8de515118daa62308666b464c057fc"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="ConstantBackground.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="69fc8a678c99866f614f98509680457f"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Group.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="9039799e8d293cdf5cff85097edd7aee"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   name="scenes"
+   kind="dir"/>
+<entry
+   committed-rev="16"
+   name="LambertianMaterial.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="4768aeeb8437a8ff793ac4d304c91042"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="2"
+   name="Time.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-10T02:48:21.535468Z"
+   checksum="a83d68d47f07544c97581225c3c98dba"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Material.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="6e6ca6587f6bd4fe77fea4b7ff75e9b9"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="27"
+   name="Scene.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-25T11:11:55.459601Z"
+   checksum="cd2b823e55607ddd0388199f8140ba6d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Triangle.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="356e46c005d98bdec28a7888ce4ae1c7"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Light.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="a70863f37c1a7ba3925cb1ffe73a00fd"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="README"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="5733146c27845ca09649f10acaeb2ba5"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Light.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="cd784ffc6ba82ba7c1c10f6c829255fd"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="14"
+   name="QAEB.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T04:22:34.532551Z"
+   checksum="6fa068558d03f8d201235031d9123fc8"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Primitive.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="7d8672c0ff818213f0093fc79c6e86c8"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="30"
+   name="Heightfield.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-26T09:41:22.154051Z"
+   checksum="1413452b7a0971bd38d5a3402e186fbc"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Color.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="b3eb6c9bf69491e2d2a869b1b16032dd"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Background.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="552165d561ea4f812418b54131ab4a1a"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="16"
+   name="MetalMaterial.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T06:51:52.244919Z"
+   checksum="fd2a15c8b45f8ebcd706255611738215"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Background.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-13T03:30:31.006612Z"
+   checksum="546d6735f5c3ed783244eb2efcab3cf0"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="32"
+   name="TODO"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-03-05T00:54:55.770154Z"
+   checksum="adcb327cc584dc45fb5a188ee626ef4d"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="2"
+   name="Image.h"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-10T02:48:21.535468Z"
+   checksum="ad7fd76d7fd0068cf6db2f689122fdfe"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+<entry
+   committed-rev="25"
+   name="DielectricMaterial.cc"
+   text-time="2005-03-20T22:20:20.000000Z"
+   committed-date="2005-02-24T07:04:35.221445Z"
+   checksum="92d1e17109dac56e62e2897c8534f1fb"
+   last-author="sparker"
+   kind="file"
+   prop-time="2005-03-20T22:20:18.000000Z"/>
+</wc-entries>

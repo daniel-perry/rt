@@ -1,0 +1,90 @@
+/* Daniel Perry
+ * Spring 05 - for cs6620
+ * ray tracer - started 24 Jan 05
+ *
+ */
+
+#include <iostream>
+#include <vector>
+
+#include "gl/hpoint.h"
+#include "gl/image.h"
+#include "gl/ray.h"
+#include "gl/rgb.h"
+#include "gl/vector3d.h"
+//#include "gl/sphere.h"
+//#include "gl/surface.h"
+
+#include "gl/Scene.h"
+#include "gl/Sphere.h"
+#include "gl/LambertianMaterial.h"
+#include "gl/Camera.h"
+#include "gl/Light.h"
+#include "gl/DirectionalLight.h"
+#include "gl/PointLight.h"
+#include "gl/ConstantBackground.h"
+#include "gl/PinholeCamera.h"
+#include "gl/Background.h"
+#include "gl/Object.h"
+#include "gl/Material.h"
+#include "gl/Group.h"
+
+#include "Time.h"
+#include "gl/util.h"
+using namespace std;
+
+int main(int args, char * argv)
+{
+  //Time time;
+  //time.initialize();
+  //double setupt,render,finalize;
+
+  int yres=512,xres=512;
+  
+  
+  image THEIMAGE(xres,yres);
+
+  LambertianMaterial lm( rgb(1,.2,.2) , .6 , .4 );
+  Sphere sp( vector3d( 0, 0, 0 ), .5 , &lm );
+
+
+  Group gr;
+  gr.add(& sp);
+  //1,=18,3.5
+  //-19,-15,3.5
+  PinholeCamera cam( hpoint( 0,0,-5,0), hpoint( 0,0,0) , vector3d(0,1,0), 0.52359878 , 1 );
+
+  vector<Light *> lights;
+  PointLight pl(rgb(.9,.9,.9),vector3d(0,2,0));
+  //PointLight pl1(rgb(.3,.1,.1),vector3d(-40,-30,50));
+  lights.push_back( &pl );
+  // lights.push_back( &pl1 );
+
+  ConstantBackground bg( rgb(.1,.2,.3) );
+  
+  Scene scene( &gr , &cam, lights, rgb( .4 , .4 , .4) , & bg );
+
+  HitRecord hit;
+  RenderContext rc(scene);
+
+  for( int i=0; i<xres; i++ ){
+    for(int j=0; j<yres; j++){
+      double x = 2 * (i-xres/2. + .5 ) / xres;
+      double y = 2 * (j-yres/2. + .5 ) / yres;
+      ray r;
+      rgb clr;
+      scene.camera->makeRay( r , rc , x , y );
+      hit.t = MYMAX;
+      if(scene.object->intersect( hit , rc , r )){
+	hit.material->shade( clr , rc , r , hit , 0 );
+      }else{
+	scene.background->getBackgroundColor( clr , rc , r );
+      }
+      THEIMAGE.set( i , j , clr );
+    }
+  }
+  
+  THEIMAGE.writeppm( cout );
+  
+  return 0;
+}

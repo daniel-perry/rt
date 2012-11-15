@@ -1,0 +1,39 @@
+
+assignment: fix function
+filter width > 3
+at least 9spp 16?
+Make a way to do jittered sampling
+
+Assignment 1:
+
+Assignment 2:
+
+Assignment 3:
+
+Assignment 4:
+
+Assignment 5:
+Implement more filters
+
+Assignment 6:
+test rings
+Use triangle mesh
+Allocate smaller triangles
+Templated grid function
+Bricked array
+Implement BVH
+Implement BSP
+
+------------------------
+     Assignment #6
+------------------------
+Programming language:   C++
+CPU(s):                 PowerPC 970
+Clock rate:             2.5 Ghz
+Threads count:          1
+Thirdparty libraries used: none
+Compiler:               IBM Xlc++ version 6.0
+Compiler flags:         -O5 -qarch=g5 -qtune=g5 
+Setup/load time:        1.66 seconds
+Render time:            1.94 seconds
+Post-process time:      0.00498 seconds
