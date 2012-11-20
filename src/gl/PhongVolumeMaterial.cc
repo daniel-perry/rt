@@ -13,6 +13,7 @@
 
 #include <math.h>
 #include <fstream>
+#include <cstdlib>
 using namespace std;
 
 void PhongVolumeMaterial::preprocess(){}
@@ -285,9 +286,9 @@ PhongVolumeMaterial::PhongVolumeMaterial(const std::string& headername,
   size1 = nx;
   size2 = ny;
   size3 = nz;
-  data = new (short**)[size1];
+  data = new short**[size1];
   for(int i=0;i<size1;i++){
-    data[i] = new (short*)[size2];
+    data[i] = new short*[size2];
   }
   for( int i=0;i<size1;i++){
     for(int j=0;j<size2;j++){

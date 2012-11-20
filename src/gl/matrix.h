@@ -5,7 +5,7 @@
 #ifndef _MATRIX_H
 #define _MATRIX_H
 
-#include <iostream.h>
+#include <iostream>
 
 class matrix
 {
@@ -70,5 +70,5 @@ matrix operator * ( double left , const matrix & right );
 matrix operator + ( const matrix & left , const matrix & right ); // matrix addition
 matrix operator - ( const matrix & left , const matrix & right );
 
-ostream& operator << ( ostream & os , const matrix & right); // output
+std::ostream& operator << ( std::ostream & os , const matrix & right); // output
 

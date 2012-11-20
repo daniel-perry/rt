@@ -6,9 +6,9 @@
 #ifndef _HPOINT_H
 #define _HPOINT_H
 
-#include <math.h>
-#include <assert.h>
-#include <iostream.h>
+#include <cmath>
+#include <cassert>
+#include <iostream>
 #include "vector3d.h"
 #include "matrix.h"
 
@@ -17,6 +17,11 @@
 #include "util.h" //for uniform min and max values.
 
 #define MY_EPSILON  MYMIN //MINFLOAT //for checking for divide by zero w/ floats
+
+using std::cerr;
+using std::endl;
+using std::istream;
+using std::ostream;
 
 class hpoint
 {

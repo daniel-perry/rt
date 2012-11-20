@@ -24,7 +24,7 @@ using namespace std;
 class PhongVolumeMaterial : public Material
 {
  public:
-  PhongVolumeMaterial::PhongVolumeMaterial(const std::string& headername,
+  PhongVolumeMaterial(const std::string& headername,
                                          const std::string& cmapname,
                                          const Point& lower, const Point& upper,
                                          double grid_stepsize, float maxopacity,

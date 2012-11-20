@@ -1,0 +1,122 @@
+PROJECT( rt )
+cmake_minimum_required(VERSION 2.8)  
+
+#Match everything when analyzing dependencies
+INCLUDE_REGULAR_EXPRESSION("^.*$")
+OPTION (BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
+IF (WIN32 AND MSVC)
+  ADD_DEFINITIONS(-D_SCL_SECURE_NO_WARNINGS)
+  ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS)
+ENDIF (WIN32 AND MSVC)
+
+SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+SET( gl_HDRS
+  gl/AxisBox.h
+  gl/Background.h
+  gl/BBox.h
+  gl/BoxFilter.h
+  gl/BVH.h
+  gl/Camera.h
+  gl/Colormap.h
+  gl/ConstantBackground.h
+  gl/CoupledMaterial.h
+  gl/DielectricMaterial.h
+  gl/DirectionalLight.h
+  gl/Disk.h
+  gl/dynarray.h
+  gl/Filter.h
+  gl/FunctionEval.h
+  gl/GaussianFilter.h
+  gl/Group.h
+  gl/HeightField.h
+  gl/HitRecord.h
+  gl/hpoint.h
+  gl/image.h
+  gl/JitteredSample.h
+  gl/LambertianMaterial.h
+  gl/LanczosSincFilter.h
+  gl/Light.h
+  gl/Material.h
+  gl/matrix.h
+  gl/MetalMaterial.h
+  gl/Object.h
+  gl/PhongMaterial.h
+  gl/PhongVolumeMaterial.h
+  gl/PinholeCamera.h
+  gl/Plane.h
+  gl/PointLight.h
+  gl/Primitive.h
+  gl/ray.h
+  gl/RenderContext.h
+  gl/rgb.h
+  gl/Ring.h
+  gl/Sample.h
+  gl/Scene.h
+  gl/Sphere.h
+  gl/TentFilter.h
+  gl/Time.h
+  gl/TInstance.h
+  gl/Triangle.h
+  gl/UniformSample.h
+  gl/util.h
+  gl/vector3d.h
+)
+
+SET( gl_SRCS
+  gl/AxisBox.cc
+  gl/BBox.cc
+  gl/BoxFilter.cc
+  gl/BVH.cc
+  gl/Colormap.cc
+  gl/CoupledMaterial.cc
+  gl/DielectricMaterial.cc
+  gl/Disk.cc
+  gl/FunctionEval.cc
+  gl/GaussianFilter.cc
+  gl/HeightField.cc
+  gl/image.cc
+  gl/JitteredSample.cc
+  gl/LambertianMaterial.cc
+  gl/LanczosSincFilter.cc
+  gl/matrix.cc
+  gl/MetalMaterial.cc
+  gl/PhongMaterial.cc
+  gl/PhongVolumeMaterial.cc
+  gl/PinholeCamera.cc
+  gl/ray.cc
+  gl/rgb.cc
+  gl/Ring.cc
+  gl/Scene.cc
+  gl/Sphere.cc
+  gl/TentFilter.cc
+  gl/Time.cc
+  gl/TInstance.cc
+  gl/Triangle.cc
+  gl/UniformSample.cc
+  gl/vector3d.cc
+)
+
+ADD_LIBRARY( gl
+  ${gl_HDRS}
+  ${gl_SRCS}
+)
+
+#SET( rt_HDRS
+#)
+
+SET( rt_SRCS
+  rt.cc
+)
+
+ADD_EXECUTABLE( rt
+                #${rt_HDRS}
+                ${rt_SRCS}
+				      )
+
+TARGET_LINK_LIBRARIES(  rt
+                        gl
+                     ) 
+
+

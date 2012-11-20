@@ -1,4 +1,4 @@
-#include <iostream.h>
+#include <iostream>
 #include "rgb.h"
 //#include "triangle.h"
 

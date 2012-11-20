@@ -15,6 +15,7 @@ using namespace std;
 #include <fstream>
 
 #include <iostream>
+#include <cstdlib>
 
 #include "BBox.h"
 
@@ -26,13 +27,13 @@ void HeightField::readHF(const char * hf_filename){
   ifstream file( hf_filename );
   if (!file){
     cerr << "Error opening " << hf_filename << endl;
-    exit(1);
+    std::exit(1);
   }
   //double minz, maxz;
   file >> nx >> ny >> dmin >> dmax;
   if (!file){
     cerr << "Error reading header from " << hf_filename << endl;
-    exit(1);
+    std::exit(1);
   }
   file.get();
   data = new float*[nx+1];
@@ -42,7 +43,7 @@ void HeightField::readHF(const char * hf_filename){
   file.read( (char*)data[0] , sizeof(float)*(nx+1)*(ny+1));
   if(!file){
     cerr << "Error reading data from "<<hf_filename<<endl;
-    exit(1);
+    std::exit(1);
   }
 
   cerr<<"What was read in:"<<endl;

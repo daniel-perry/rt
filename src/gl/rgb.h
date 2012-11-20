@@ -1,5 +1,5 @@
-#include <iostream.h>
-#include <assert.h>
+#include <iostream>
+#include <cassert>
 
 #ifndef _RGB_H
 #define _RGB_H
@@ -78,8 +78,8 @@ rgb operator * (const rgb& lhs, float k );
 rgb operator * ( float k, const rgb& rhs );
 rgb operator / (const rgb& lhs, float k );
 
-ostream & operator << ( ostream & os, const rgb & c1 );
-istream & operator >> ( istream & is, rgb & c1 ); //not protected from entering values outside of [0,1]
+std::ostream & operator << ( std::ostream & os, const rgb & c1 );
+std::istream & operator >> ( std::istream & is, rgb & c1 ); //not protected from entering values outside of [0,1]
 
 bool operator == (const rgb& lhs, const rgb& rhs);
 bool operator != (const rgb& lhs, const rgb& rhs);

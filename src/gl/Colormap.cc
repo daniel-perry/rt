@@ -5,6 +5,8 @@
 #include "Colormap.h"
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
+#include <cmath>
 using namespace std;
 
 Colormap::Colormap(const std::string& filename)
@@ -12,7 +14,7 @@ Colormap::Colormap(const std::string& filename)
   ifstream in(filename.c_str());
   if(!in){
     cerr << "Error opening colormap: " << filename << '\n';
-    exit(1);
+    std::exit(1);
   }
   while(in){
     Data d;
@@ -24,7 +26,7 @@ Colormap::Colormap(const std::string& filename)
   }
   if(in.bad() || input_data.size() == 0){
     cerr << "Error reading colormap: " << filename << '\n';
-    exit(1);
+    std::exit(1);
   }
   cerr << "Read " << input_data.size() << " colormap entries from " << filename << '\n';
 }
@@ -38,7 +40,7 @@ void Colormap::rescale(double stepsize)
   scaled_data.resize(input_data.size());
   for(int i=0;i<static_cast<int>(scaled_data.size());i++){
     Data d = input_data[i];
-    d.opacity = 1-exp(-d.opacity  * stepsize);
+    d.opacity = 1-std::exp(-d.opacity  * stepsize);
     scaled_data[i] = d;
   }
 }

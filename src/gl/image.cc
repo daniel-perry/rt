@@ -1,7 +1,8 @@
 #include "image.h"
-#include <stdlib.h>  // for abs()
-#include <math.h> // for ceil(), floor()
+#include <cstdlib>  // for abs()
+#include <cmath> // for ceil(), floor()
 #include <values.h> // for MAXFLOAT
+#include <cassert>
 //#include <limits.h> //for INT_MAX
 #include <string>
 

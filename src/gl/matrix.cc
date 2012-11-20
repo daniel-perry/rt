@@ -4,8 +4,8 @@
 
 #include "matrix.h"
 #include <math.h>
-#include <assert.h>
-#include <iostream.h>
+#include <cassert>
+#include <iostream>
 
 // EPSILON for checking if doubles are != 0
 #define MY_EPSILON 1e-09
@@ -299,18 +299,18 @@ matrix operator - ( const matrix & left , const matrix & right )
   return left + (-right);
 }
 
-ostream & operator << (ostream & os , const matrix & right)
+std::ostream & operator << (std::ostream & os , const matrix & right)
 {
-  os <<right.rows()<<" X "<<right.cols()<<endl;
-  os <<'['<<endl;
+  os <<right.rows()<<" X "<<right.cols()<<std::endl;
+  os <<'['<<std::endl;
   for ( int r = 0 ; r < right.rows() ; r++ )
   {
     os << "[ ";
     for ( int c = 0 ; c < right.cols() ; c++ )
       os << right[r][c] << ' ';
-    os << "], " << endl;
+    os << "], " << std::endl;
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 
   return os;
 }

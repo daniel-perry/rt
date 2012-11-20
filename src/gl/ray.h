@@ -7,7 +7,10 @@
 #define _RAY_H
 
 #include "vector3d.h"
-#include <math.h>
+#include <cmath>
+
+using std::ostream;
+using std::istream;
 
 class ray
 {

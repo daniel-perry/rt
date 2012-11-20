@@ -5,9 +5,12 @@
 
 #include "vector3d.h"
 
-#include <math.h>
-#include <assert.h>
-#include <iostream.h>
+#include <cmath>
+#include <cassert>
+#include <iostream>
+
+using std::istream;
+using std::ostream;
 
 /*   
 ///////////////////////////////

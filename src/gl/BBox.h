@@ -25,7 +25,7 @@ class BBox : public Object
 
   Point centroid();
 
-  char *  print(){return "BBox";}
+  char* print(){return "BBox";}
 
   Point bounds[2];
 };

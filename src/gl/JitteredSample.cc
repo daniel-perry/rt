@@ -12,6 +12,7 @@
 #include "JitteredSample.h"
 #include "ray.h"
 #include <math.h>
+#include <cstdlib>
 //#include "FunctionEval.h"
 //#include <iostream>
 //using namespace std;

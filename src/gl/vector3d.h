@@ -6,9 +6,9 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-#include <math.h>
-#include <assert.h>
-#include <iostream.h>
+#include <cmath>
+//#include <assert.h>
+#include <iostream>
 
 class vector3d  {
 public:
@@ -67,8 +67,8 @@ public:
 bool operator==(const vector3d &t1, const vector3d &t2);
 bool operator!=(const vector3d &t1, const vector3d &t2);
 
-istream &operator>>(istream &is, vector3d &t);
-ostream &operator<<(ostream &os, const vector3d &t);
+std::istream &operator>>(std::istream &is, vector3d &t);
+std::ostream &operator<<(std::ostream &os, const vector3d &t);
 
 vector3d operator+(const vector3d &v1, const vector3d &v2);
 vector3d operator-(const vector3d &v1, const vector3d &v2);

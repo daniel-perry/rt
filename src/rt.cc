@@ -66,6 +66,7 @@
 #include "gl/matrix.h"
 #include "gl/TInstance.h"
 
+#include <cstdlib>
 using namespace std;
 #include <fstream>
 

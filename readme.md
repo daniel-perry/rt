@@ -4,3 +4,9 @@ Features
 -
 -
 
+to build:
+- mkdir bin
+- cd bin
+- cmake ../src
+- make
+
