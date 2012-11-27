@@ -48,7 +48,7 @@ class Ring : public Primitive
    }
 
    void preprocess(){}   
-   char *  print(){return "Ring";}
+   std::string toString(){return "Ring";}
 
    BBox getBBox();
 

@@ -35,7 +35,7 @@ class Sphere : public Primitive
 
   void preprocess(){}
 
-  char *  print(){return "Sphere";}
+  std::string toString(){return "Sphere";}
 
   BBox getBBox();
 

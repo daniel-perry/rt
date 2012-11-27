@@ -48,7 +48,7 @@ class AxisBox : public Primitive
 
   void preprocess(){}
 
-  char *  print(){return "AxisBox";}
+  std::string toString(){return "AxisBox";}
 
   vector3d bounds[2];
   vector3d Normal; //reset at every hit.

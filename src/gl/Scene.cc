@@ -18,6 +18,7 @@ void Scene::render( Color & clr , const ray & r ){
   hit.bbox_t = MYMAX;
   if( object->intersect( hit , rc , r ) ){
     hit.material->shade( clr , rc , r , hit , 0 , 1 );
+    //hit.material->shade( clr , rc , r , hit , MaxRayDepth , MinAttenuation );
   }else{
     background->getBackgroundColor( clr , rc , r );
   }

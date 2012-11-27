@@ -44,7 +44,7 @@ class Disk : public Primitive
 
   void preprocess(){}
 
-  char *  print(){return "Disk";}
+  std::string toString(){return "Disk";}
 
   BBox getBBox();
 

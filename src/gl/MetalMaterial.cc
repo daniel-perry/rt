@@ -14,7 +14,7 @@
 #include "Primitive.h"
 #include "Scene.h"
 
-void MetalMaterial::shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth , double attenuation) const{
+void MetalMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth , double attenuation) const{
   vector3d pt = r.eval( hit.t );
   vector3d norm = hit.prim->normal(pt);
   HitRecord tempHit;

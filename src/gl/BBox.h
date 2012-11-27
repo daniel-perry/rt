@@ -25,7 +25,7 @@ class BBox : public Object
 
   Point centroid();
 
-  char* print(){return "BBox";}
+  std::string toString(){return "BBox";}
 
   Point bounds[2];
 };

@@ -41,7 +41,7 @@ class Triangle : public Primitive
 
   void preprocess(){}
 
-  char *  print(){ return "Triangle";}
+  std::string toString(){ return "Triangle";}
 
   vector3d normal( const vector3d & p ) const{
     return Normal;

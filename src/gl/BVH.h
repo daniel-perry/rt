@@ -26,7 +26,7 @@ class BVH : public Object
 
   void buildTree( Group & gr , int axis,int count);
 
-  char *  print(){return "BVH";}  
+  std::string toString(){return "BVH";}  
 
   BBox bbox;
   Object * left , * right;

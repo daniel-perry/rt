@@ -5,13 +5,6 @@ Scene* make_scene()
   scene->imageX = 512;
   scene->imageY = 512;
   
-  //scene->imageX = 1;
-  //scene->imageY = 1;
-
-
-  //scene->imageX = 16;
-  //scene->imageY = 16;
-
   scene->setBackground(new ConstantBackground(Color(0.5, 0.8, 0.9)));
   Group* world = new Group();
   

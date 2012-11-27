@@ -25,7 +25,7 @@ class Group : public Object
   
   void preprocess(){}
   
-  char *  print(){return "Group";}
+  std::string toString(){return "Group";}
 
   bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
     bool hitp = false;

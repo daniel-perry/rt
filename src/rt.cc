@@ -7,8 +7,6 @@
 #include <iostream>
 #include <vector>
 
-
-
 #include "gl/hpoint.h"
 #include "gl/image.h"
 #include "gl/ray.h"
@@ -70,28 +68,29 @@
 using namespace std;
 #include <fstream>
 
-#include "req.h" // this file defines the scene by defining the function make_scene().
+//#include "req.h" // this file defines the scene by defining the function make_scene().
+#include "req8.h"
 
 #include <string.h>
 void printTree( BVH * bvh ){
   cerr<<"bbox:"<<bvh->bbox.bounds[0]<<","<<bvh->bbox.bounds[1]<<endl;
   if(bvh->left!=NULL){
-    cerr<<"left:"<<bvh->left->print();
+    cerr<<"left:"<<bvh->left;
   }else{
     cerr<<"left:NULL";
   }
   if(bvh->right!=NULL){
-    cerr<<" right:"<<bvh->right->print()<<endl;
+    cerr<<" right:"<<bvh->right<<endl;
   }else{
     cerr<<" right:NULL"<<endl;
   }
 
-  if( bvh->left!=NULL && (strcmp( bvh->left->print() , "BVH" ) == 0) ){
+  if( bvh->left!=NULL && bvh->left->toString() == "BVH" ){
     cerr<<"left node:"<<endl;
     printTree( (BVH*)bvh->left );
   }
 
-  if( bvh->right!=NULL && (strcmp( bvh->right->print() , "BVH" ) == 0) ){
+  if( bvh->right!=NULL && bvh->right->toString() == "BVH" ){
     cerr<<"right node:"<<endl;
     printTree( (BVH*)bvh->right );
   }
@@ -160,36 +159,7 @@ int main(int args, char * argv[] )
     for(int j=0; j<yres; j++){
       ray r;
       rgb clr,sampled_clr(0,0,0);
-      //double filter_total=0,filter_weight;
-      //for( int k=0; k<scene->sampler->numSamples; k++){
-      //double x = 2 * (i-xres/2. + .5 ) / xres;
-      //double y = 2 * (j-yres/2. + .5 ) / yres;
-
       scene->sampler->sample( i , j , clr );
-      
-      // update on progress:
-      /*if( remaining % 200 == 0 )
-	cerr<<remaining<<"/"<<total<<endl;
-	remaining--;*/
-
-
-      /*    
-      filter_weight = scene->filter->getWeight( scene->sampler->samples[i][j][k].x(),scene->sampler->samples[i][j][k].y() );      
-      sampled_clr += (clr * filter_weight);
-      filter_total += filter_weight;
-      */
-      
-      //cerr<<"filter_weight: "<<filter_weight<<endl;
-	
-      
-      //cerr<<"sampled color:"<<clr<<endl<<"filter weight:"<<scene->filter->getWeight( scene->sampler->samples[i][j][k].x(),scene->sampler->samples[i][j][k].y() )<<endl;
-      
-      //}
-      //sampled_clr /= filter_total;
-      
-      //cerr<<"final color:"<<sampled_clr<<endl;
-      
-      //THEIMAGE.set( i , j , sampled_clr);
       THEIMAGE.set( i , j , clr);
     }
   }

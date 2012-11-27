@@ -21,7 +21,7 @@ class MetalMaterial : public Material
 
   void preprocess(){}
   
-  void shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const;
+  void shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth, double attenuation) const;
 
 
   rgb Reflective;

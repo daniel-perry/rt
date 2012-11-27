@@ -19,7 +19,7 @@ using namespace std;
 void PhongVolumeMaterial::preprocess(){}
 
 
-void PhongVolumeMaterial::shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const{
+void PhongVolumeMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth, double attenuation) const{
 
   // find texit:
   double t_enter = hit.t, t_exit=t_enter;
@@ -39,6 +39,10 @@ void PhongVolumeMaterial::shade( rgb & result, const RenderContext & context, co
 
   double it = ceil( t_enter / grid_stepsize);
   double t = it * grid_stepsize;
+  std::cerr << "t_enter: " << t_enter << std::endl;
+  std::cerr << "stepsize: " << grid_stepsize << std::endl;
+  std::cerr << "it: " << it << std::endl;
+  std::cerr << "t: " << t << std::endl;
 
   Color accum_color(0,0,0);
   double accum_opacity = 0;  

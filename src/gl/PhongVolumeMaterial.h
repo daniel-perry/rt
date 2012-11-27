@@ -7,9 +7,6 @@
  */
 
 
-// DEBUGGING: run g++ -c PhongVolumeMaterial.cc
-
-
 #ifndef _PHONGVOLUMEMATERIAL_H
 #define _PHONGVOLUMEMATERIAL_H
 
@@ -25,16 +22,22 @@ class PhongVolumeMaterial : public Material
 {
  public:
   PhongVolumeMaterial(const std::string& headername,
-                                         const std::string& cmapname,
-                                         const Point& lower, const Point& upper,
-                                         double grid_stepsize, float maxopacity,
-                                         float Kd, float Ka,
-                                         const Color& phong_color,
-					   int phong_exponent);
+                      const std::string& cmapname,
+                      const Point& lower, 
+                      const Point& upper,
+                      double grid_stepsize, 
+                      float maxopacity,
+                      float Kd, float Ka,
+                      const Color& phong_color,
+					            int phong_exponent);
 
   void preprocess();
-  void shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const;
-
+  void shade( rgb & result, 
+              const RenderContext & context, 
+              const ray & r, 
+              HitRecord & hit, 
+              int depth, 
+              double attenuation) const;
   
   Colormap cmap;
   Point lower, upper, bounds[2];

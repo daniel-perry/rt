@@ -30,7 +30,6 @@ class Primitive : public Object
   
   // normal returned is guaranteed to be normalized.
   virtual vector3d normal( const vector3d & p ) const = 0;
-
 };
 
 

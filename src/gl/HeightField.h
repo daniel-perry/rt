@@ -43,7 +43,7 @@ class HeightField : public Primitive
     return Normal;
   }
 
-  char *  print(){return "HeightField";}
+  std::string toString(){return "HeightField";}
 
   void preprocess(){
     // find diagnol

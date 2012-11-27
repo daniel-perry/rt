@@ -82,6 +82,7 @@ SET( gl_SRCS
   gl/LanczosSincFilter.cc
   gl/matrix.cc
   gl/MetalMaterial.cc
+  gl/Object.cc
   gl/PhongMaterial.cc
   gl/PhongVolumeMaterial.cc
   gl/PinholeCamera.cc

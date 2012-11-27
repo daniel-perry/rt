@@ -26,7 +26,7 @@ class TInstance : public Primitive
 
   void preprocess(){}
   BBox getBBox(){return original->getBBox();}
-  char* print(){ return "TInstance";}
+  std::string toString(){ return "TInstance";}
 
 
   Vector transform_point( const Vector & p );
