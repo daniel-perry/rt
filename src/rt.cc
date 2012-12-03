@@ -4,9 +4,15 @@
  *
  */
 
+// std
+#include <cstdlib>
+using namespace std;
+#include <fstream>
+#include <string>
 #include <iostream>
 #include <vector>
 
+// local
 #include "gl/hpoint.h"
 #include "gl/image.h"
 #include "gl/ray.h"
@@ -64,14 +70,10 @@
 #include "gl/matrix.h"
 #include "gl/TInstance.h"
 
-#include <cstdlib>
-using namespace std;
-#include <fstream>
+//#include "req.h" 
+#include "volume_scene.h"
 
-//#include "req.h" // this file defines the scene by defining the function make_scene().
-#include "req8.h"
 
-#include <string.h>
 void printTree( BVH * bvh ){
   cerr<<"bbox:"<<bvh->bbox.bounds[0]<<","<<bvh->bbox.bounds[1]<<endl;
   if(bvh->left!=NULL){

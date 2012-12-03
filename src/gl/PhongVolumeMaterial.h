@@ -29,7 +29,9 @@ class PhongVolumeMaterial : public Material
                       float maxopacity,
                       float Kd, float Ka,
                       const Color& phong_color,
-					            int phong_exponent);
+					            int phong_exponent,
+                      bool nearest_neighbor = true
+                      );
 
   void preprocess();
   void shade( rgb & result, 
@@ -46,6 +48,7 @@ class PhongVolumeMaterial : public Material
   float Kd, Ka;
   Color phong_color;
   int phong_exponent;
+  bool nearest;
   
   Point diag, cellsize;
   short *** data; //3d array.
