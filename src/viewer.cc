@@ -69,6 +69,7 @@ void display(void)
    gluLookAt(0, 0, -g_fViewDistance, 0, 0, -1, 0, 1, 0);
    // Set up the stationary light
    glLightfv(GL_LIGHT0, GL_POSITION, g_lightPos);
+   glDisable(GL_LIGHTING);
    // Render the scene
    RenderObjects();
    // Make sure changes appear onscreen
@@ -81,6 +82,7 @@ void reshape(GLint width, GLint height)
    glViewport(0, 0, g_Width, g_Height);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
+   //glOrtho(0.f, g_Width, g_Height, 0.f, 0.f, 1.f);
    gluPerspective(65.0, (float)g_Width / g_Height, g_nearPlane, g_farPlane);
    glMatrixMode(GL_MODELVIEW);
 }
