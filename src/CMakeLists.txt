@@ -120,4 +120,21 @@ TARGET_LINK_LIBRARIES(  rt
                         gl
                      ) 
 
+find_package(GLUT)
+include_directories ( ${GLUT_INCLUDE_DIRS} )
+find_package(OpenGL)
+include_directories ( ${OpenGL_INCLUDE_DIRS} )
 
+SET( viewer_SRCS
+  viewer.cc
+)
+
+ADD_EXECUTABLE( viewer
+                #${viewer_HDRS}
+                ${viewer_SRCS}
+				      )
+
+TARGET_LINK_LIBRARIES( viewer
+                      ${GLUT_LIBRARY} 
+                      ${OPENGL_LIBRARY}
+                     )
