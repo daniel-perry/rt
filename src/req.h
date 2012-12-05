@@ -1,3 +1,6 @@
+#ifndef SCENE_DEF_H
+#define SCENE_DEF_H
+
 Scene* make_scene()
 {
   Scene* scene = new Scene();
@@ -86,3 +89,5 @@ Scene* make_scene()
 
   return scene;
 }
+
+#endif

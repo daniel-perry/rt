@@ -1,13 +1,16 @@
 // viewer - shows the current results of the ray tracer..
+
 #include <GL/glut.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifdef _WIN32
 # include <windows.h>
 #else
 # include <sys/time.h>
 #endif
-//#include "texture.h"
+
+#include "RayTracer.h"
+
 #define VIEWING_DISTANCE_MIN  3.0
 #define TEXTURE_ID_SQUARE 1
 enum {
@@ -37,6 +40,7 @@ static DWORD last_idle_time;
 #else
 static struct timeval last_idle_time;
 #endif
+
 void DrawSquare(float x_left, float x_right, float y_top, float y_bottom)
 {
   float z = 0.f;

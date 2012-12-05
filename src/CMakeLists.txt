@@ -1,6 +1,13 @@
 PROJECT( rt )
 cmake_minimum_required(VERSION 2.8)  
 
+# required for opengl based viewer
+# (the command line version rt, can be compiled w/o this stuff)
+find_package(GLUT REQUIRED)
+include_directories ( ${GLUT_INCLUDE_DIRS} )
+find_package(OpenGL REQUIRED)
+include_directories ( ${OpenGL_INCLUDE_DIRS} )
+
 #Match everything when analyzing dependencies
 INCLUDE_REGULAR_EXPRESSION("^.*$")
 OPTION (BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -99,20 +106,28 @@ SET( gl_SRCS
   gl/vector3d.cc
 )
 
+################
+# gl library
+################
+
 ADD_LIBRARY( gl
   ${gl_HDRS}
   ${gl_SRCS}
 )
 
-#SET( rt_HDRS
-#)
+##################
+# rt - commandline ray tracer
+#################
+SET( rt_HDRS
+  rt.h
+)
 
 SET( rt_SRCS
   rt.cc
 )
 
 ADD_EXECUTABLE( rt
-                #${rt_HDRS}
+                ${rt_HDRS}
                 ${rt_SRCS}
 				      )
 
@@ -120,21 +135,33 @@ TARGET_LINK_LIBRARIES(  rt
                         gl
                      ) 
 
-find_package(GLUT)
-include_directories ( ${GLUT_INCLUDE_DIRS} )
-find_package(OpenGL)
-include_directories ( ${OpenGL_INCLUDE_DIRS} )
+###################
+# raytracer lib - encapsulates the raytracer for use in other programs
+###################
+
+ADD_LIBRARY( raytracer
+  req.h # scene def
+  volume_scene.h # scene def
+  rt.h
+  RayTracer.h
+  RayTracer.cc
+)
+
+#####################
+# viewer - interactive interface to the ray tracer
+#####################
 
 SET( viewer_SRCS
   viewer.cc
 )
 
 ADD_EXECUTABLE( viewer
-                #${viewer_HDRS}
                 ${viewer_SRCS}
 				      )
 
 TARGET_LINK_LIBRARIES( viewer
                       ${GLUT_LIBRARY} 
                       ${OPENGL_LIBRARY}
+                      raytracer
+                      gl
                      )
