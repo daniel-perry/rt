@@ -40,6 +40,7 @@ static DWORD last_idle_time;
 #else
 static struct timeval last_idle_time;
 #endif
+RayTracer * g_rayTracer = 0;
 
 void DrawSquare(float x_left, float x_right, float y_top, float y_bottom)
 {
@@ -85,6 +86,18 @@ void reshape(GLint width, GLint height)
 }
 unsigned char *  makeTexture(int width, int height)
 {
+   if( !g_rayTracer )
+   {
+     g_rayTracer = new RayTracer(width,height);
+   }
+   if( !(g_rayTracer->getWidth() == width && g_rayTracer->getHeight() == height) )
+   {
+     g_rayTracer->setSize(width,height); 
+   }
+
+   g_rayTracer->restartRender();
+   return g_rayTracer->getBuffer();
+#if 0
    unsigned char * pCircle = new unsigned char[ width * height * 4 ];
    // make a texture image...
    for(size_t r=0; r<width; ++r)
@@ -113,6 +126,7 @@ unsigned char *  makeTexture(int width, int height)
      }
    }
    return pCircle;
+#endif
 }
 void InitGraphics(void)
 {
