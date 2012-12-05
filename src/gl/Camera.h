@@ -26,6 +26,7 @@ class Camera
   // to return a ray for tracing for that point on the "film"
   virtual void makeRay ( ray & r , const RenderContext & context, double x , double y ) const = 0;
   
+  virtual std::string toString() = 0;
 };
 
 #endif

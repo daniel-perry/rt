@@ -44,6 +44,11 @@ PinholeCamera::PinholeCamera( const hpoint & eye , const hpoint & look_at, const
 }
 
 PinholeCamera::PinholeCamera( const vector3d & eye , const vector3d & look_at, const vector3d & nup , double ntheta, double AR ){
+  initialize(eye,look_at,nup,ntheta,AR);
+}
+
+void PinholeCamera::initialize( const vector3d & eye , const vector3d & look_at, const vector3d & nup , double ntheta, double AR )
+{
   position = hpoint(eye.x(),eye.y(),eye.z());
   vector3d e=eye, la=look_at;
   gaze = la-e;

@@ -31,6 +31,13 @@ public:
    */
   unsigned char * getBuffer(){ return m_buffer; }
 
+  /** access to scene
+   */
+  Scene * getScene(){ return m_scene; }
+  const Scene * getScene() const { return m_scene; }
+
+  void setDoneRenderingCB( void (*doneRendering)() ){ m_doneRendering = doneRendering; }
+
 private:
   /** render a sub region of the image
    */
@@ -46,6 +53,8 @@ private:
   unsigned char * m_buffer;
   // num of components for each pixel
   size_t m_numComponents;
+  // callback
+  void (*m_doneRendering)(); 
 };
 
 #endif

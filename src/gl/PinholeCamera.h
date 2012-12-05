@@ -12,6 +12,9 @@
 #ifndef _PINHOLECAMERA_H
 #define _PINHOLECAMERA_H
 
+#include <string>
+#include <sstream>
+
 #include "Camera.h"
 #include "hpoint.h"
 #include "vector3d.h"
@@ -29,6 +32,15 @@ class PinholeCamera : public Camera
   void makeRay ( ray & r, const RenderContext & context, double x , double y ) const;
 
   void preprocess(double aspect_ratio);
+
+  void initialize(const vector3d & eye , const vector3d & look_at, const vector3d & nup , double ntheta, double AR );
+
+  virtual std::string toString()
+  {
+    std::stringstream s;
+    s << "pinhole pos="<<position<<", gaze="<<gaze<<", up="<<up;
+    return s.str();
+  }
 
   hpoint position;
   vector3d gaze;
