@@ -73,6 +73,29 @@ void display(void)
    glutSwapBuffers();
 }
 
+void showResult()
+{
+  glBindTexture(GL_TEXTURE_2D, TEXTURE_ID_SQUARE);
+  gluBuild2DMipmaps(GL_TEXTURE_2D,            // texture to specify
+                    GL_RGBA,                  // internal texture storage format
+                    g_rayTracer->getWidth(),  // texture width
+                    g_rayTracer->getHeight(), // texture height
+                    GL_RGBA,                  // pixel format
+                    GL_UNSIGNED_BYTE,         // color component format
+                    g_rayTracer->getBuffer());// pointer to texture image
+  glutPostRedisplay();
+}
+
+void showProgress(int value)
+{
+  // TODO: may be able to do this automatically by removing swap buffer?
+  showResult();
+  if(g_rayTracer->getState() == RayTracer::RENDER)
+  {
+    glutTimerFunc(500, showProgress, 0); // call again, until state changes..
+  }
+}
+
 // to prevent multiple unnecessary renderings:
 void patience(int value)
 {
@@ -80,6 +103,8 @@ void patience(int value)
   {
     g_rayTracer->restartRender();
     g_patienceValue = 0;
+
+    glutTimerFunc(500, showProgress, 0);
   }
 }
 
@@ -87,7 +112,7 @@ void patience(int value)
 void doneRendering()
 {
   std::cerr << "doneRendering" << std::endl;
-  glutPostRedisplay();
+  showResult();
 }
 void reshape(GLint width, GLint height)
 {
@@ -236,30 +261,7 @@ void MouseMotion(int x, int y)
       glutPostRedisplay();
     }
 }
-/*
-void AnimateScene(void)
-{
-  float dt;
-#ifdef _WIN32
-  DWORD time_now;
-  time_now = GetTickCount();
-  dt = (float) (time_now - last_idle_time) / 1000.0;
-#else
-  // Figure out time elapsed since last call to idle function
-  struct timeval time_now;
-  gettimeofday(&time_now, NULL);
-  dt = (float)(time_now.tv_sec  - last_idle_time.tv_sec) +
-  1.0e-6*(time_now.tv_usec - last_idle_time.tv_usec);
-#endif
-  // Animate the teapot by updating its angles
-  g_fTeapotAngle += dt * 30.0;
-  g_fTeapotAngle2 += dt * 100.0;
-  // Save time_now for next time
-  last_idle_time = time_now;
-  // Force redraw
-  glutPostRedisplay();
-}
-*/
+
 void SelectFromMenu(int idCommand)
 {
   switch (idCommand)
@@ -291,19 +293,40 @@ void SelectFromMenu(int idCommand)
 }
 void Keyboard(unsigned char key, int x, int y)
 {
+  static const float STEP_SIZE = 1.0;
+  vector3d right = cross(g_nup,(g_lookat-g_eye).MakeUnitVector());
   switch (key)
   {
   case 27:             // ESCAPE key
     exit (0);
     break;
-  case 'l':
-    SelectFromMenu(MENU_LIGHTING);
-    break;
+  //case 'l':
+  //  SelectFromMenu(MENU_LIGHTING);
+  //  break;
   case 'p':
     SelectFromMenu(MENU_POLYMODE);
     break;
   case 't':
     SelectFromMenu(MENU_TEXTURING);
+  case 'j': // down
+    g_eye -= (g_nup * STEP_SIZE);
+    g_lookat -= (g_nup * STEP_SIZE);
+    updateCamera(g_fViewDistance);
+    break;
+  case 'k': // up
+    g_eye += (g_nup * STEP_SIZE);
+    g_lookat += (g_nup * STEP_SIZE);
+    updateCamera(g_fViewDistance);
+    break;
+  case 'l': // right
+    g_eye += (right * STEP_SIZE);
+    g_lookat += (right * STEP_SIZE);
+    updateCamera(g_fViewDistance);
+    break;
+  case 'h': // left
+    g_eye -= (right * STEP_SIZE);
+    g_lookat -= (right * STEP_SIZE);
+    updateCamera(g_fViewDistance);
     break;
   }
 }

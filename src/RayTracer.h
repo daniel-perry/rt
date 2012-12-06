@@ -38,6 +38,12 @@ public:
 
   void setDoneRenderingCB( void (*doneRendering)() ){ m_doneRendering = doneRendering; }
 
+  enum State{ 
+    DONE,
+    RENDER 
+    };
+  State getState(){ return m_state; }
+
 private:
   /** render a sub region of the image
    */
@@ -53,6 +59,8 @@ private:
   unsigned char * m_buffer;
   // num of components for each pixel
   size_t m_numComponents;
+  // state 
+  State m_state;
   // callback
   void (*m_doneRendering)(); 
 };

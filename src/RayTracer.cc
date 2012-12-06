@@ -13,6 +13,8 @@ m_rc()
   m_rc.scene = m_scene;
   m_scene->rc = m_rc;
 
+  m_state = RayTracer::DONE;
+
   setSize(width,height);
 }
 
@@ -35,9 +37,11 @@ void RayTracer::restartRender()
 {
   std::cerr << "rendering.." << std::endl;
   std::cerr << "camera: " << m_scene->camera->toString() << std::endl;
+  m_state = RayTracer::RENDER;
   // TODO: spread this across a few threads..
   this->render(0,0,m_scene->imageX-1,m_scene->imageX-1);
   std::cerr << "done rendering." << std::endl;
+  m_state = RayTracer::DONE;
   (*m_doneRendering)(); // notify callback..
 }
 
