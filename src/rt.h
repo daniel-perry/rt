@@ -22,6 +22,7 @@
 #include "gl/DielectricMaterial.h"
 #include "gl/CoupledMaterial.h"
 #include "gl/PhongVolumeMaterial.h"
+#include "gl/MIPVolumeMaterial.h"
 
 #include "gl/Colormap.h"
 

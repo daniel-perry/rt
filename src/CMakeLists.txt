@@ -53,6 +53,7 @@ SET( gl_HDRS
   gl/Object.h
   gl/PhongMaterial.h
   gl/PhongVolumeMaterial.h
+  gl/MIPVolumeMaterial.h
   gl/PinholeCamera.h
   gl/Plane.h
   gl/PointLight.h
@@ -94,6 +95,7 @@ SET( gl_SRCS
   gl/Object.cc
   gl/PhongMaterial.cc
   gl/PhongVolumeMaterial.cc
+  gl/MIPVolumeMaterial.cc
   gl/PinholeCamera.cc
   gl/ray.cc
   gl/rgb.cc
