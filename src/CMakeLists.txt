@@ -166,5 +166,6 @@ TARGET_LINK_LIBRARIES( viewer
                        gl
                        ${GLUT_LIBRARY} 
                        ${OPENGL_LIBRARY}
-                       ${Threads_LIBRARY}
+                       #${Threads_LIBRARY}
+                       ${CMAKE_THREAD_LIBS_INIT}
                      )

@@ -15,6 +15,7 @@ struct Region
   size_t r1;
   size_t c1;
   RayTracer * rt;
+  bool done;
 };
 
 /** Encapsulates the ray tracer..
@@ -75,7 +76,8 @@ private:
   Scene * m_scene;
   RenderContext m_rc;
   // holds the rendered image
-  unsigned char * m_buffer;
+  typedef unsigned char buffer_type;
+  buffer_type * m_buffer;
   // num of components for each pixel
   size_t m_numComponents;
   // state 

@@ -89,7 +89,7 @@ void showResult()
 void showProgress(int value)
 {
   // TODO: may be able to do this automatically by removing swap buffer?
-  std::cerr << "showProgres()" << std::endl;
+  //std::cerr << "showProgres()" << std::endl;
   showResult();
   if(g_rayTracer->getState() == RayTracer::RENDER)
   {
@@ -113,7 +113,7 @@ void patience(int value)
 // what to do when ray tracer is done rendering...
 void doneRendering()
 {
-  std::cerr << "doneRendering" << std::endl;
+  std::cerr << "done rendering." << std::endl;
   showResult();
 }
 void reshape(GLint width, GLint height)

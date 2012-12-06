@@ -1,3 +1,4 @@
+#include <cstring>
 
 #include "RayTracer.h"
 
@@ -11,7 +12,7 @@ m_buffer(0),
 m_numComponents(4), // default r,g,b,a
 m_state(RayTracer::DONE),
 m_doneRendering(0),
-m_numThreads(2),
+m_numThreads(10),
 m_threads(0),
 m_regions(0)
 {
@@ -44,6 +45,7 @@ void * thread_render(void * p)
   {
     region->rt->render(region->r0,region->c0,region->r1,region->c1);
   }
+  return 0;
 }
 
 
@@ -51,27 +53,31 @@ void RayTracer::restartRender()
 {
   std::cerr << "rendering.." << std::endl;
   std::cerr << "camera: " << m_scene->camera->toString() << std::endl;
+
   m_state = RayTracer::RENDER;
 
-  if(m_threads)
+  if(m_threads != 0)
   {
     // if we are restarting during a currently running
     // render, cancel the threads, before starting new
     // threads.
     for(size_t i=0; i<m_numThreads; ++i)
     {
-      pthread_cancel(m_threads[i]);
+      int error = pthread_cancel(m_threads[i]);
+      if(error != 0)
+      {
+        std::cerr << "error canceling thread: " << error << std::endl;
+      }
     }
+    delete [] m_threads;
+    delete [] m_regions;
   }
 
-  if( m_last_numThreads != m_numThreads )
-  {
-    if(m_threads) delete [] m_threads;
-    if(m_regions) delete [] m_regions;
-    m_threads = new pthread_t[m_numThreads];
-    m_regions = new Region[m_numThreads];
-    m_last_numThreads = m_numThreads;
-  }
+  m_threads = new pthread_t[m_numThreads];
+  m_regions = new Region[m_numThreads];
+  
+  // reset buffer:
+  memset(m_buffer, 0, m_numComponents*getWidth()*getHeight()*sizeof(buffer_type));
 
   /* Start up threads */
   pthread_attr_t pthread_custom_attr;
@@ -83,6 +89,7 @@ void RayTracer::restartRender()
     m_regions[i].c1 = getWidth()-1;
     m_regions[i].r0 = i*(getHeight()/m_numThreads);
     m_regions[i].r1 = (i+1)*(getHeight()/m_numThreads)-1;
+    m_regions[i].done = false;
     if( i == m_numThreads-1 )
     {
       m_regions[i].r1 = getHeight()-1; // make sure all rows covered.
@@ -99,23 +106,36 @@ bool RayTracer::checkProgress()
 {
   if( m_state == RayTracer::RENDER )
   {
-    std::cerr << "checkProgress" << std::endl;
     bool all_done = true;
     /* Synchronize the completion of each thread. */
     for (size_t i=0; i<m_numThreads; ++i)
     {
-      //pthread_join(threads[i],NULL);
-      if(pthread_tryjoin_np(m_threads[i],NULL) != 0)
+      if(!m_regions[i].done)
       {
-        all_done = false;
+        int retval = pthread_tryjoin_np(m_threads[i],NULL);
+        if(retval == 0)
+        {
+          m_regions[i].done = true;
+          //std::cerr << "retval: " << retval << std::endl;
+          //std::cerr << "EDEADLK=" << EDEADLK << std::endl;
+          //std::cerr << "EINVAL=" << EINVAL << std::endl;
+          //std::cerr << "ESRCH=" << ESRCH << std::endl;
+          //std::cerr << "EBUSY=" << EBUSY << std::endl;
+          //std::cerr << "ETIMEDOUT=" << ETIMEDOUT << std::endl;
+        }
+        if(retval != 0)
+        {
+          all_done = false;
+        }
       }
     }
 
     if(all_done)
     {
       delete [] m_threads;
+      m_threads = 0;
       delete [] m_regions;
-      std::cerr << "done rendering.*****************************************" << std::endl;
+      m_regions = 0;
       m_state = RayTracer::DONE;
       (*m_doneRendering)(); // notify callback..
     }
@@ -127,12 +147,13 @@ bool RayTracer::checkProgress()
 
 void RayTracer::render(size_t r0, size_t c0, size_t r1, size_t c1)
 {
-  for( int i=r0; i<=r1; i++ ){
-    for(int j=c0; j<=c1; j++){
+  for(size_t i=r0; i<=r1; i++ ){
+    for(size_t j=c0; j<=c1; j++){
       rgb clr;
       m_scene->sampler->sample( i , j , clr );
       set_color( i , j , clr);
     }
+    pthread_testcancel();
   }
 }
 
