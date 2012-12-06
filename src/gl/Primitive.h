@@ -26,7 +26,7 @@ using namespace std;
 class Primitive : public Object
 {
  public:
-  virtual bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) = 0;
+  virtual bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const = 0;
   
   // normal returned is guaranteed to be normalized.
   virtual vector3d normal( const vector3d & p ) const = 0;

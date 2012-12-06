@@ -17,7 +17,7 @@
 class UniformSample : public Sample{
  public:
   UniformSample( int ns , Scene * sc ):Sample(ns,sc){}
-  void sample( int x , int y , Color & clr );
+  void sample( int x , int y , Color & clr ) const;
   double sample( int x , int y , double x_limit1 , double y_limit1 , double x_limit2, double y_limit2 , Color & clr ) const;
 };
 

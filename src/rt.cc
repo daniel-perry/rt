@@ -89,8 +89,8 @@ int main(int args, char * argv[] )
 
   HitRecord hit;
   RenderContext rc(scene);
-  scene->rc = rc;
-  scene->rc.scene = scene;
+  scene->m_rc = rc;
+  scene->m_rc.scene = scene;
 
   //scene->object->intersect( hit , rc , ray( vector3d(0,0,0),vector3d(1,0,0) ) );
 

@@ -73,8 +73,8 @@ class Scene
   int imageX, imageY;
 
   // for render function:
-  HitRecord hit;
-  RenderContext rc;
+  HitRecord m_hit;
+  RenderContext m_rc;
 
   void setBackground( Background * bg){ background = bg; }
   void setObject( Object * obj){ object = obj; }
@@ -86,7 +86,7 @@ class Scene
   void setSampler( Sample * s ){ sampler = s;}
   void setFilter( Filter * f ){ filter = f; }
 
-  void render( Color & clr , const ray & r );
+  void render( Color & clr , const ray & r ) const;
 
  private:
 

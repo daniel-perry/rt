@@ -1,7 +1,21 @@
 #ifndef RayTracer_H
 #define RayTracer_H
 
+// system
+#include <pthread.h>
+
+// local
 #include "rt.h"
+
+class RayTracer;
+struct Region
+{
+  size_t r0;
+  size_t c0;
+  size_t r1;
+  size_t c1;
+  RayTracer * rt;
+};
 
 /** Encapsulates the ray tracer..
  */
@@ -27,6 +41,14 @@ public:
    */
   void restartRender();
   
+  /** attempt join threads, confirm completion.
+   */ 
+  bool checkProgress();
+
+  /** render a sub region of the image
+   */
+  void render(size_t r0, size_t c0, size_t r1, size_t c1);
+ 
   /** access to the render buffer
    */
   unsigned char * getBuffer(){ return m_buffer; }
@@ -45,9 +67,6 @@ public:
   State getState(){ return m_state; }
 
 private:
-  /** render a sub region of the image
-   */
-  void render(size_t r0, size_t c0, size_t r1, size_t c1);
   /** convert color to unsigned char and set in buffer.
    */
   void set_color(size_t r, size_t c, const Color &clr);
@@ -63,6 +82,12 @@ private:
   State m_state;
   // callback
   void (*m_doneRendering)(); 
+
+  // state used for threading:
+  size_t m_numThreads;
+  size_t m_last_numThreads;
+  pthread_t * m_threads;
+  Region * m_regions;
 };
 
 #endif

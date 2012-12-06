@@ -89,6 +89,7 @@ void showResult()
 void showProgress(int value)
 {
   // TODO: may be able to do this automatically by removing swap buffer?
+  std::cerr << "showProgres()" << std::endl;
   showResult();
   if(g_rayTracer->getState() == RayTracer::RENDER)
   {
@@ -101,6 +102,7 @@ void patience(int value)
 {
   if( value == g_patienceValue ) // if this is the last call to render..
   {
+    std::cerr << "patience()" << std::endl;
     g_rayTracer->restartRender();
     g_patienceValue = 0;
 
@@ -340,6 +342,10 @@ int BuildPopupMenu (void)
   glutAddMenuEntry ("Exit demo\tEsc", MENU_EXIT);
   return menu;
 }
+void idleFunction()
+{
+  g_rayTracer->checkProgress();
+}
 int main(int argc, char** argv)
 {
   // GLUT Window Initialization:
@@ -355,7 +361,7 @@ int main(int argc, char** argv)
   glutKeyboardFunc (Keyboard);
   glutMouseFunc (MouseButton);
   glutMotionFunc (MouseMotion);
-  //glutIdleFunc (AnimateScene);
+  glutIdleFunc (idleFunction);
   // Create our popup menu
   BuildPopupMenu ();
   glutAttachMenu (GLUT_RIGHT_BUTTON);

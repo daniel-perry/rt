@@ -21,7 +21,7 @@ class BVH : public Object
     right = NULL;
   }
   void preprocess(){}
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const;
   BBox getBBox();
 
   void buildTree( Group & gr , int axis,int count);

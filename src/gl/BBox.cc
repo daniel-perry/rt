@@ -40,7 +40,7 @@ BBox merge ( const BBox & b1 , const BBox & b2 ){
 
 
 // same as axis box, but without normal calculations.
-bool BBox::intersect( HitRecord & hit , const RenderContext & context , const ray & r ){
+bool BBox::intersect( HitRecord & hit , const RenderContext & context , const ray & r ) const {
    double t0 = MYMIN , t1 = MYMAX;
   double tmin,tmax,tymin,tymax,tzmin,tzmax;
   //vector3d n_min,n_max;

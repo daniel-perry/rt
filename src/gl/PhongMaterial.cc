@@ -19,7 +19,8 @@ void PhongMaterial::shade( rgb & result, const RenderContext & context, const ra
   tempHit.id = 2;
   //vector3d pt  = r.eval( hit.t );
   vector3d pt  = hit.hitPoint( hit.t , r );
-  vector3d norm = hit.prim->normal(pt);
+  //vector3d norm = hit.prim->normal(pt);
+  vector3d norm = hit.normal;
   double cosPhi = -dot( norm , r.direction() );
   if( cosPhi < 0 ){
     cosPhi = -cosPhi;

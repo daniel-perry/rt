@@ -13,7 +13,7 @@
 #include "util.h"
 
 // using algorithm by Amy Williams found at http://www.cs.utah.edu/~awilliam/box/box.pdf
-bool AxisBox::intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+bool AxisBox::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const {
   
   double t0 = MYMIN , t1 = MYMAX;
   double tmin,tmax,tymin,tymax,tzmin,tzmax;
@@ -62,14 +62,15 @@ bool AxisBox::intersect( HitRecord & hit , const RenderContext & context, const 
     n_min *= checker;
     n_max *= checker;
 
-    Normal = n_min;
+    //Normal = n_min;
 
     if(tmin < MYMIN ){ // if in center of box, this will return the one infront....
       tmin = tmax;
-      Normal = n_max;
+      //Normal = n_max;
+      return hit.hit( tmin, n_max, this , material ) ;
     }
 
-    return hit.hit( tmin , this , material ) ;
+    return hit.hit( tmin, n_min, this , material ) ;
   }
   return false;
 

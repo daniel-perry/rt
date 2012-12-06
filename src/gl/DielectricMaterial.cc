@@ -17,7 +17,8 @@ void DielectricMaterial::shade( rgb & result, const RenderContext & context, con
   
   HitRecord tempHit;
   vector3d pt = r.eval( hit.t );
-  vector3d norm = hit.prim->normal( pt );
+  //vector3d norm = hit.prim->normal( pt );
+  vector3d norm = hit.normal;
   double cosTheta = dot( norm , r.direction() );
   vector3d unflippedNorm = norm;
   double RefTmp;

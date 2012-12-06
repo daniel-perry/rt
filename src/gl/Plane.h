@@ -38,11 +38,11 @@ class Plane : public Primitive
   }
   
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const{
     double cosTheta = dot( r.direction() , norm );
     if( fabs(cosTheta) > MYMIN ){ // not parallel to plane, and so has to intersect it(considering an infinate plane). - MYMIN acts as a sort of cut-off point as well.
       double t = (d - dot( r.origin() , norm)) / cosTheta;
-      return hit.hit( t , this , material );
+      return hit.hit( t, norm, this , material );
     }
     return false; // parallel to plane, treating that case as non-intersecting.
     

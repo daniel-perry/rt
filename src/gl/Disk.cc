@@ -25,7 +25,7 @@ bool Disk::intersect( HitRecord & hit , const RenderContext & context, const ray
     vector3d dist = intersect_pt - center;
 
     if( dist.squaredLength() < radius * radius ){
-      return hit.hit( t , this , material );
+      return hit.hit( t , Normal, this , material );
     }    
   }
   return false; // parallel to plane in which disk resides or hit plane outside disk

@@ -231,7 +231,7 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 
 	  // check to see if correct:
 	  if( (t2 > (tnear + MYMIN)) && (t2 < (tnext_xy+MYMIN)) ){
-	    if(hit.hit(t2, this , material )){
+	    if(hit.hit(t2, Normal, this , material )){
 	      S = r.eval( t2 );//P
 	      
 	      a = (S.x()-C.x())/cellsize.x();//u
@@ -258,7 +258,7 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 	  if((t2 > (tnear + MYMIN)) && (t2 < (tnext_xy+MYMIN))){
 	    if((t3 > (tnear + MYMIN)) && (t3 < (tnext_xy+MYMIN))){
 		t2 = fmin(t2,t3);	      
-	      if(hit.hit( t2, this , material )){
+	      if(hit.hit( t2, Normal, this , material )){
 		S = r.eval(t2);//P
 		
 		a = (S.x()-C.x())/cellsize.x();//u
@@ -273,7 +273,7 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 		return false;
 	      }
 	    }
-	    if(hit.hit(t2, this , material )){
+	    if(hit.hit(t2, Normal, this , material )){
 	      S = r.eval( t2 );//P
 	      
 	      a = (S.x()-C.x())/cellsize.x();//u
@@ -288,7 +288,7 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 	    }	    
 	  }
 	  else if((t3 > (tnear + MYMIN)) && (t3 < (tnext_xy+MYMIN))){	
-	    if(hit.hit(t3, this , material )){
+	    if(hit.hit(t3, Normal, this , material )){
 	      S = r.eval( t3 );//P
 	      
 	      a = (S.x()-C.x())/cellsize.x();//u

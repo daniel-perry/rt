@@ -27,7 +27,7 @@ class Group : public Object
   
   std::string toString(){return "Group";}
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const {
     bool hitp = false;
     for( int i=0; i<(int)objects.size(); i++){
       if(objects[i]->intersect( hit , context, r )){

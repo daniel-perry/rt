@@ -33,7 +33,7 @@ class AxisBox : public Primitive
   }
   
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const ;
   
   // normal returned is guaranteed to be normalized.
   // NOTE that for the AxisBox class, the normal function will only be valid after a hit

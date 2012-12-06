@@ -13,11 +13,12 @@
 #include "ray.h"
 #include "BBox.h"
 
-bool Sphere::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) {
+bool Sphere::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const {
   // for now using function defined in ray.h,ray.cc
   double t;
   if( ray_sphere_intersect( r, center, radius, MYMIN, MYMAX, t ) ){
-    return hit.hit( t , this , material );
+    Point p = r.eval(t);
+    return hit.hit( t, normal(p), this , material );
   }
   return false;
 }

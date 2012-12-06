@@ -28,11 +28,12 @@ class HitRecord
  public:
   HitRecord(){t =MYMAX;bbox_t=MYMAX;prim=0;material=0;data_good=false;}
 
-  bool hit(double new_t, Primitive * hit_prim, Material * hit_matl ){
+  bool hit(double new_t, const Vector & n, const Primitive * hit_prim, const Material * hit_matl ){
     if(new_t<t && new_t > MYMIN){
       t = new_t;
       prim = hit_prim;
       material = hit_matl;
+      normal = n; 
       return true;
     }
     return false;
@@ -81,11 +82,12 @@ class HitRecord
   Point data_point;
   char data[MAXSIZE];
   double t;
+  vector3d normal;
   
   double bbox_t;
 
-  Primitive * prim;
-  Material * material;  
+  const Primitive * prim;
+  const Material * material;  
 
 };
 

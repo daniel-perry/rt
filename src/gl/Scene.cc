@@ -13,7 +13,10 @@
 #include "HitRecord.h"
 #include "Object.h"
 
-void Scene::render( Color & clr , const ray & r ){
+void Scene::render( Color & clr , const ray & r ) const {
+  HitRecord hit(m_hit);
+  RenderContext rc(m_rc);
+
   hit.t = MYMAX;
   hit.bbox_t = MYMAX;
   if( object->intersect( hit , rc , r ) ){

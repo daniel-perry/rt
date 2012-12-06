@@ -16,7 +16,8 @@
 
 void MetalMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth , double attenuation) const{
   vector3d pt = r.eval( hit.t );
-  vector3d norm = hit.prim->normal(pt);
+  //vector3d norm = hit.prim->normal(pt);
+  vector3d norm = hit.normal;
   HitRecord tempHit;
   rgb speclight(0,0,0);
 

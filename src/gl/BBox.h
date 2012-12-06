@@ -19,7 +19,7 @@ class BBox : public Object
   BBox( const Point & min_pt , const Point & max_pt );
 
   void preprocess();
-  bool intersect( HitRecord & hit , const RenderContext & context , const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context , const ray & r ) const;
 
   BBox getBBox();
 

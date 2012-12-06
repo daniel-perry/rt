@@ -29,7 +29,7 @@ class Sample{
   }
 
   // samples entire pixel (x,y) and returns filtered color of entire pixel
-  virtual void sample( int x , int y , Color & clr ) = 0;
+  virtual void sample( int x , int y , Color & clr ) const = 0;
 
   // returns sample (i,j) of pixel (x,y)
   //virtual void sample( int x , int y , int i , int j , Color & clr ) const = 0;
@@ -43,7 +43,7 @@ class Sample{
   //virtual void sample( int x, int y) = 0;// fills sampleColors[] with the samples.
 
   int numSamples;
-  double x_center, y_center, pixel_half_width;
+  //double x_center, y_center, pixel_half_width;
   //Color *sampleColors;
   Scene * scene;
 

@@ -25,7 +25,7 @@ bool Ring::intersect( HitRecord & hit , const RenderContext & context, const ray
     vector3d dist = intersect_pt - center;
     double distSq = dist.squaredLength();
     if( distSq < largeRadius*largeRadius && distSq > smallRadius*smallRadius ){
-      return hit.hit( t , this , material );
+      return hit.hit( t, Normal, this , material );
     }    
   }
   return false; // parallel to plane in which disk resides or hit plane outside disk

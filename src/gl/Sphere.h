@@ -26,7 +26,7 @@ class Sphere : public Primitive
   Sphere( Material * matl, const vector3d & ctr , double rad ){ center = ctr; radius = rad; material = matl;
   }
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const;
   
   // normal returned is guaranteed to be normalized.
   vector3d normal( const vector3d & p ) const {

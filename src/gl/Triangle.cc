@@ -27,7 +27,7 @@ bool Triangle::intersect(  HitRecord & hit , const RenderContext & context, cons
   double t, beta, gamma;
 
   if( ray_triangle_intersect( r , p0, p1, p2, MYMIN , MYMAX, beta, gamma , t ) ){
-    return hit.hit( t , this , material );
+    return hit.hit( t, Normal, this , material );
   }
   return false;
 

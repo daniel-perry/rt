@@ -12,7 +12,7 @@ using namespace std;
 
 #include "BVH.h"
 
-bool BVH::intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+bool BVH::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const {
   /* cerr<<"\n\nbvh intersect:"<<endl;
   cerr<<"bbox:"<<bbox.bounds[0]<<","<<bbox.bounds[1]<<endl;
   cerr<<"left:"<<left->print()<<" right:"<<right->print()<<endl;

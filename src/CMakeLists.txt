@@ -4,9 +4,11 @@ cmake_minimum_required(VERSION 2.8)
 # required for opengl based viewer
 # (the command line version rt, can be compiled w/o this stuff)
 find_package(GLUT REQUIRED)
-include_directories ( ${GLUT_INCLUDE_DIRS} )
+include_directories( ${GLUT_INCLUDE_DIRS} )
 find_package(OpenGL REQUIRED)
-include_directories ( ${OpenGL_INCLUDE_DIRS} )
+include_directories( ${OpenGL_INCLUDE_DIRS} )
+find_package(Threads REQUIRED)
+include_directories( ${Threads_INCLUDE_DIRS} )
 
 #Match everything when analyzing dependencies
 INCLUDE_REGULAR_EXPRESSION("^.*$")
@@ -160,8 +162,9 @@ ADD_EXECUTABLE( viewer
 				      )
 
 TARGET_LINK_LIBRARIES( viewer
-                      ${GLUT_LIBRARY} 
-                      ${OPENGL_LIBRARY}
-                      raytracer
-                      gl
+                       raytracer
+                       gl
+                       ${GLUT_LIBRARY} 
+                       ${OPENGL_LIBRARY}
+                       ${Threads_LIBRARY}
                      )

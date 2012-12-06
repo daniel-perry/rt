@@ -17,7 +17,8 @@
 //#include <iostream>
 //using namespace std;
 
-void JitteredSample::sample( int x , int y , Color & clr ){
+void JitteredSample::sample( int x , int y , Color & clr ) const {
+  double x_center, y_center, pixel_half_width;
   clr = Color(0,0,0);
   double total_weight = 0,temp_weight;
 
@@ -52,7 +53,9 @@ void JitteredSample::sample( int x , int y , Color & clr ){
 #ifdef USE_FUNCTION_  // use function instead of tracing.
       FunctionEval( x_offset , y_offset , temp_clr );
 #else
-      scene->camera->makeRay( r , scene->rc , x_offset , y_offset );
+      RenderContext rc(scene->m_rc);
+      //scene->camera->makeRay( r , scene->rc , x_offset , y_offset );
+      scene->camera->makeRay( r , rc , x_offset , y_offset );
       scene->render( temp_clr , r );
 #endif
 
@@ -101,6 +104,7 @@ void JitteredSample::sample( int x , int y , Color & clr ){
 
 // this is more of a utility funciton for the above sample() function.
 double JitteredSample::sample( int x , int y , double x_limit1 , double y_limit1 , double x_limit2, double y_limit2 , Color & clr ) const{
+  double x_center, y_center, pixel_half_width;
 
   clr = Color(0,0,0);
   double total_weight = 0, temp_weight;
@@ -132,7 +136,9 @@ double JitteredSample::sample( int x , int y , double x_limit1 , double y_limit1
 #ifdef USE_FUNCTION_  // use function instead of tracing.
 	FunctionEval( x_offset , y_offset , temp_clr );
 #else
-	scene->camera->makeRay( r , scene->rc , x_offset , y_offset );
+  RenderContext rc(scene->m_rc);
+	scene->camera->makeRay( r , rc , x_offset , y_offset );
+	//scene->camera->makeRay( r , scene->rc , x_offset , y_offset );
 	scene->render( temp_clr , r );
 #endif
 

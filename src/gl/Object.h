@@ -27,7 +27,7 @@ class Object
 {
  public:
   virtual void preprocess()=0;
-  virtual bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) = 0;
+  virtual bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const = 0;
   virtual BBox getBBox()=0; 
   virtual std::string toString()=0;
 };
