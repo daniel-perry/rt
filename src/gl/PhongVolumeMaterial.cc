@@ -46,9 +46,7 @@ void PhongVolumeMaterial::shade( rgb & result, const RenderContext & context, co
   double accum_opacity = 0;  
 
   //cerr<<endl<<endl<<"new t val"<<endl<<endl;
-  //while( t < t_exit ){
-  t = t_exit;
-  while( t >= t_enter ){
+  while( t < t_exit ){
     Point P = r.eval( t );
     //std::cerr << "lower="<<lower<<", diag="<<diag<<std::endl;
     //std::cerr << "orig p=" << P << std::endl;
@@ -197,8 +195,7 @@ void PhongVolumeMaterial::shade( rgb & result, const RenderContext & context, co
               << ", acc op=" << accum_opacity << std::endl;
     */
 
-    //t += world_stepsize;
-    t -= world_stepsize;
+    t += world_stepsize;
   }
  
   // volume should be "see-through", so now going to cast ray behind it...
@@ -271,13 +268,20 @@ PhongVolumeMaterial::PhongVolumeMaterial(const std::string& headername,
   for(int i=0;i<size1;i++){
     data[i] = new short*[size2];
   }
+  short * ptr = new short[nx*ny*nz]; // need the data to be contiguous
   for( int i=0;i<size1;i++){
     for(int j=0;j<size2;j++){
-      data[i][j] = new short[size3];
+      data[i][j] = &ptr[i*size2*size3+j*size3]; 
     }
   }
 
   cellsize = diag * Vector(1./(nx-1), 1./(ny-1), 1./(nz-1));
+
+  // get the folder of the header.. data volume is relative to that..
+  size_t pos = headername.find_last_of('/');
+  std::string location = headername.substr(0,pos+1);
+  volumename = location + volumename;
+  // now read in the volume
   ifstream in(volumename.c_str()); 
   in.read(reinterpret_cast<char*>(&data[0][0][0]), nx*ny*nz*sizeof(short));
 
@@ -285,6 +289,7 @@ PhongVolumeMaterial::PhongVolumeMaterial(const std::string& headername,
     cerr << "Error reading data: " << volumename << '\n';
     exit(1);
   }
+  std::cerr << "read " << volumename << std::endl;
 
   world_stepsize = cellsize.length()/pow(3, 1./3.) * grid_stepsize;
   cmap.rescale(world_stepsize);
