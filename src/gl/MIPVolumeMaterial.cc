@@ -37,7 +37,8 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
   }
 
   double it = ceil( t_enter / grid_stepsize);
-  double t = it * grid_stepsize;
+  //double t = it * grid_stepsize;
+  double t = t_enter;
 
   Color accum_color(0,0,0);
   double accum_opacity = 0;  
