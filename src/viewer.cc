@@ -11,7 +11,7 @@
 
 #include "RayTracer.h"
 
-#define VIEWING_DISTANCE_MIN  3.0
+#define VIEWING_DISTANCE_MIN  0.1
 #define TEXTURE_ID_SQUARE 1
 enum {
   MENU_LIGHTING = 1,
@@ -23,10 +23,12 @@ typedef int BOOL;
 #define TRUE 1
 #define FALSE 0
 static BOOL g_bButton1Down = FALSE;
-static GLfloat g_fViewDistance = 3 * VIEWING_DISTANCE_MIN;
+static BOOL g_bButton2Down = FALSE;
 static int g_Width = 600;                          // Initial window width
 static int g_Height = 600;                         // Initial window height
+static int g_xClick = 0;
 static int g_yClick = 0;
+static int g_zClick = 0;
 #ifdef _WIN32
 static DWORD last_idle_time;
 #else
@@ -36,7 +38,7 @@ static struct timeval last_idle_time;
 RayTracer * g_rayTracer = 0;
 int g_patienceValue = 0;
 // in space of ray tracer
-vector3d g_eye(5,5,0);
+vector3d g_eye(-5,-5,-5);
 vector3d g_lookat(0,0,0);
 vector3d g_nup(0,0,1);
 double g_theta = 55;
@@ -226,14 +228,25 @@ void InitGraphics(void)
                      pTextureImage);    // pointer to texture image
 }
 
-void updateCamera(float viewDistance)
+void updateCameraDistance(float viewDistance)
+{
+  vector3d camera_direction = g_eye-g_lookat;
+  ray to_camera( g_lookat, camera_direction );
+  g_eye = to_camera.eval(viewDistance/camera_direction.length());
+}
+
+void rotateCamera(float change_x, float change_y)
+{
+  //vector3d camera_direction = g_eye-g_lookat;
+  //ray to_camera( g_lookat, camera_direction );
+  //g_eye = to_camera.eval(viewDistance/camera_direction.length());
+}
+
+void syncCamera()
 {
   PinholeCamera * ph = dynamic_cast<PinholeCamera*>(g_rayTracer->getScene()->camera);
   if(ph)
   {
-    vector3d camera_direction = g_eye-g_lookat;
-    ray to_camera( g_lookat, camera_direction );
-    g_eye = to_camera.eval(viewDistance/camera_direction.length());
     std::cerr << "new eye:" << g_eye << std::endl;
     ph->initialize(g_eye,g_lookat,g_nup,g_theta,g_aspectRatio);
     glutTimerFunc(500, patience, ++g_patienceValue);
@@ -248,20 +261,34 @@ void MouseButton(int button, int state, int x, int y)
   if (button == GLUT_LEFT_BUTTON)
     {
       g_bButton1Down = (state == GLUT_DOWN) ? TRUE : FALSE;
-      g_yClick = y - 3 * g_fViewDistance;
+      g_xClick = x; //- 3 * g_fViewDistance;
+      g_yClick = y; //- 3 * g_fViewDistance;
     }
+  else if (button == GLUT_RIGHT_BUTTON)
+    {
+      g_bButton2Down = (state == GLUT_DOWN) ? TRUE : FALSE;
+      g_zClick = y; //- 3 * g_fViewDistance;
+    }
+
 }
 void MouseMotion(int x, int y)
 {
   // If button1 pressed, zoom in/out if mouse is moved up/down.
   if (g_bButton1Down)
-    {
-      g_fViewDistance = (y - g_yClick) / 3.0;
-      if (g_fViewDistance < VIEWING_DISTANCE_MIN)
-         g_fViewDistance = VIEWING_DISTANCE_MIN;
-      updateCamera(g_fViewDistance);
-      glutPostRedisplay();
-    }
+  {
+    float change_x = (x - g_xClick) / 3.0;
+    float change_y = (y - g_yClick) / 3.0;
+    rotateCamera(change_x,change_y);
+    syncCamera();
+    //glutPostRedisplay();
+  }
+  else if (g_bButton2Down)
+  {
+    float distance_change = (y - g_zClick) / 3.0;
+    updateCameraDistance(distance_change);
+    syncCamera();
+    //glutPostRedisplay();
+  }
 }
 
 void SelectFromMenu(int idCommand)
@@ -313,22 +340,22 @@ void Keyboard(unsigned char key, int x, int y)
   case 'j': // down
     g_eye -= (g_nup * STEP_SIZE);
     g_lookat -= (g_nup * STEP_SIZE);
-    updateCamera(g_fViewDistance);
+    syncCamera();
     break;
   case 'k': // up
     g_eye += (g_nup * STEP_SIZE);
     g_lookat += (g_nup * STEP_SIZE);
-    updateCamera(g_fViewDistance);
+    syncCamera();
     break;
   case 'l': // right
     g_eye += (right * STEP_SIZE);
     g_lookat += (right * STEP_SIZE);
-    updateCamera(g_fViewDistance);
+    syncCamera();
     break;
   case 'h': // left
     g_eye -= (right * STEP_SIZE);
     g_lookat -= (right * STEP_SIZE);
-    updateCamera(g_fViewDistance);
+    syncCamera();
     break;
   }
 }
@@ -363,8 +390,8 @@ int main(int argc, char** argv)
   glutMotionFunc (MouseMotion);
   glutIdleFunc (idleFunction);
   // Create our popup menu
-  BuildPopupMenu ();
-  glutAttachMenu (GLUT_RIGHT_BUTTON);
+  //BuildPopupMenu ();
+  //glutAttachMenu (GLUT_RIGHT_BUTTON);
   // Get the initial time, for use by animation
 #ifdef _WIN32
   last_idle_time = GetTickCount();

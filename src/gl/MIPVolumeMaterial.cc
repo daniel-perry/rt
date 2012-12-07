@@ -86,10 +86,12 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
     Color color;
     cmap.lookup( (float)value , opacity , color );
 
+    color = color * opacity;
+
     float intensity = (color.r() + color.g() + color.b())/3.f;
     if(intensity > max_intensity)
     {
-      accum_color = color * opacity;
+      accum_color = color;
     }
     t += world_stepsize;
   }
