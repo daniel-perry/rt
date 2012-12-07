@@ -16,8 +16,9 @@ using namespace std;
 class MIPVolumeMaterial : public Material
 {
  public:
-  MIPVolumeMaterial(const std::string& headername,
-                      const std::string& cmapname,
+  //MIPVolumeMaterial(const std::string& headername,
+  MIPVolumeMaterial(const std::string& data_fn,
+                      const std::string& cmap_fn,
                       const Point& lower, 
                       const Point& upper,
                       double grid_stepsize, 

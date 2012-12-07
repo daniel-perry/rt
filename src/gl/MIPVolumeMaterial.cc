@@ -7,6 +7,9 @@
 #include "Primitive.h"
 #include "Scene.h"
 
+// libs
+#include <NrrdIO.h>
+
 // std
 #include <cmath>
 #include <fstream>
@@ -122,15 +125,15 @@ void swap(short& data)
   p[1]=tmp;
 }
 
-MIPVolumeMaterial::MIPVolumeMaterial(const std::string& headername,
-                                         const std::string& cmapname,
+MIPVolumeMaterial::MIPVolumeMaterial(const std::string& data_fn,
+                                         const std::string& cmap_fn,
                                          const Point& lower, 
                                          const Point& upper,
                                          double grid_stepsize, 
                                          float maxopacity,
                                          bool nearest_neighbor
                                          )
-:cmap(cmapname), 
+:cmap(cmap_fn), 
  lower(lower), 
  upper(upper), 
  grid_stepsize(grid_stepsize),
@@ -141,6 +144,22 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& headername,
   bounds[0] = lower;
   bounds[1] = upper;
 
+  Nrrd *nin;
+  nin = nrrdNew(); // empty container
+  if (nrrdLoad(nin, data_fn.c_tr(), NULL)) 
+  {
+    err = biffGetDone(NRRD);
+    std::cerr << "MIPVolumeMaterial: trouble reading " << data_fn << ": " <<  err << std::endl;
+    free(err);
+    exit(1);
+  }
+  int nx = nin->axis[0].size;
+  int ny = nin->axis[1].size;
+  int nz = nin->axis[2].size;
+  std::cerr << "Finished reading " << data_fn << ": " << nx << "," << ny << "," <<nz << std::endl;
+  
+
+  /*
   ifstream hdr(headername.c_str());
   string volumename;
   hdr >> volumename;
@@ -175,9 +194,11 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& headername,
       data[i][j] = &ptr[i*size2*size3+j*size3]; 
     }
   }
+  */
 
   cellsize = diag * Vector(1./(nx-1), 1./(ny-1), 1./(nz-1));
 
+  /*
   // get the folder of the header.. data volume is relative to that..
   size_t pos = headername.find_last_of('/');
   std::string location = headername.substr(0,pos+1);
@@ -191,10 +212,12 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& headername,
     exit(1);
   }
   std::cerr << "read " << volumename << std::endl;
+  */
 
   world_stepsize = cellsize.length()/pow(3, 1./3.) * grid_stepsize;
   cmap.rescale(world_stepsize);
 
+  /*
   short tmp = 0x1234;
   string machineendian;
   if(*reinterpret_cast<char*>(&tmp) == 0x12)
@@ -220,4 +243,5 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& headername,
       }
     }
   }
+  */
 }
