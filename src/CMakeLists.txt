@@ -9,6 +9,9 @@ find_package(OpenGL REQUIRED)
 include_directories( ${OpenGL_INCLUDE_DIRS} )
 find_package(Threads REQUIRED)
 include_directories( ${Threads_INCLUDE_DIRS} )
+find_package(Teem REQUIRED) # version 1.10.0
+include_directories( ${Teem_INCLUDE_DIRS} )
+
 
 #Match everything when analyzing dependencies
 INCLUDE_REGULAR_EXPRESSION("^.*$")
@@ -133,6 +136,7 @@ SET( rt_SRCS
 ADD_EXECUTABLE( rt
                 ${rt_HDRS}
                 ${rt_SRCS}
+                ${Teem_LIBRARY}
 				      )
 
 TARGET_LINK_LIBRARIES(  rt
@@ -170,4 +174,5 @@ TARGET_LINK_LIBRARIES( viewer
                        ${OPENGL_LIBRARY}
                        #${Threads_LIBRARY}
                        ${CMAKE_THREAD_LIBS_INIT}
+                       ${Teem_LIBRARY}
                      )
