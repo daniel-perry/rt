@@ -12,7 +12,14 @@
 #include "util.h"
 #include "Scene.h"
 
-void LambertianMaterial::shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const{
+#define _TWO_SIDED_LIGHTING_OP 1
+
+void LambertianMaterial::shade( rgb & result, 
+              const RenderContext & context, 
+              const ray & r, 
+              HitRecord & hit, 
+              int depth, 
+              double attenuation) const {
   HitRecord tempHit;
   tempHit.id = 2;
   vector3d pt  = r.eval( hit.t );

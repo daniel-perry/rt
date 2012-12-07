@@ -104,7 +104,6 @@ void patience(int value)
 {
   if( value == g_patienceValue ) // if this is the last call to render..
   {
-    std::cerr << "patience()" << std::endl;
     g_rayTracer->restartRender();
     g_patienceValue = 0;
 
@@ -228,18 +227,43 @@ void InitGraphics(void)
                      pTextureImage);    // pointer to texture image
 }
 
-void updateCameraDistance(float viewDistance)
+void updateCameraDistance(float change_pct)
 {
-  vector3d camera_direction = g_eye-g_lookat;
-  ray to_camera( g_lookat, camera_direction );
-  g_eye = to_camera.eval(viewDistance/camera_direction.length());
+  vector3d direction = g_eye-g_lookat;
+  ray to_eye( g_lookat, direction );
+  g_eye = to_eye.eval(change_pct);
 }
 
-void rotateCamera(float change_x, float change_y)
+void rotateCamera(float pct_x, float pct_y)
 {
-  //vector3d camera_direction = g_eye-g_lookat;
-  //ray to_camera( g_lookat, camera_direction );
-  //g_eye = to_camera.eval(viewDistance/camera_direction.length());
+  vector3d direction = g_eye-g_lookat;
+
+  // "left/right" rotation:
+  hpoint dir(direction,1);
+  dir = makeRotateMatrix( pct_x * M_PI/4, g_nup.x(), g_nup.y(), g_nup.z() ) * dir;
+
+  // "up/down" rotation:
+  //hpoint nup(g_nup,1);
+  //vector3d left = cross( direction, g_nup );
+  //left.MakeUnitVector();
+  //std::cerr << "left: " << left << std::endl;
+  //matrix rotate = makeRotateMatrix( pct_y * M_PI/4 , left.x(), left.y(), left.z() );
+
+
+  //dir = rotate * dir;
+  //nup = rotate * nup;
+
+  direction = dir.tovector3d();
+
+  // hack - use translation to fake movement in z..
+  float dist = direction.length();
+  direction += g_nup * dist * pct_y;
+
+  //g_nup = nup.tovector3d();
+  //g_nup.MakeUnitVector(); // make sure it's still unit length
+
+  ray to_eye( g_lookat, direction );
+  g_eye = to_eye.eval(1.f);
 }
 
 void syncCamera()
@@ -261,13 +285,13 @@ void MouseButton(int button, int state, int x, int y)
   if (button == GLUT_LEFT_BUTTON)
     {
       g_bButton1Down = (state == GLUT_DOWN) ? TRUE : FALSE;
-      g_xClick = x; //- 3 * g_fViewDistance;
-      g_yClick = y; //- 3 * g_fViewDistance;
+      g_xClick = x; 
+      g_yClick = y; 
     }
   else if (button == GLUT_RIGHT_BUTTON)
     {
       g_bButton2Down = (state == GLUT_DOWN) ? TRUE : FALSE;
-      g_zClick = y; //- 3 * g_fViewDistance;
+      g_zClick = y; 
     }
 
 }
@@ -276,16 +300,19 @@ void MouseMotion(int x, int y)
   // If button1 pressed, zoom in/out if mouse is moved up/down.
   if (g_bButton1Down)
   {
-    float change_x = (x - g_xClick) / 3.0;
+    float change_x = -(x - g_xClick) / 3.0;
+    float pct_x = change_x/g_rayTracer->getWidth();
     float change_y = (y - g_yClick) / 3.0;
-    rotateCamera(change_x,change_y);
+    float pct_y = change_y/g_rayTracer->getHeight();
+    rotateCamera(pct_x,pct_y);
     syncCamera();
     //glutPostRedisplay();
   }
   else if (g_bButton2Down)
   {
-    float distance_change = (y - g_zClick) / 3.0;
-    updateCameraDistance(distance_change);
+    float distance_change = (y - g_zClick);
+    float pct = 1-distance_change/g_rayTracer->getHeight();
+    updateCameraDistance(pct);
     syncCamera();
     //glutPostRedisplay();
   }

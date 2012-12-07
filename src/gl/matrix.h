@@ -54,6 +54,8 @@ private:
 
 
 matrix makeIdentityMatrix();
+// rotate about an arbitrary unit-vector axis
+matrix makeRotateMatrix( double theta, double u, double v, double w );
 matrix makeRotateZMatrix( double ccwThetaFromX );
 matrix makeRotateYMatrix( double ccwThetaFromNegX );
 matrix makeRotateXMatrix( double ccwThetaFromY );

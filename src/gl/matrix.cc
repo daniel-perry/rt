@@ -322,6 +322,24 @@ matrix makeIdentityMatrix()
   return matrix( 4 , 4 , mat_data );
 }
 
+matrix makeRotateMatrix( double theta, double u, double v, double w )
+{
+  // rotation about an arbitrary axis
+  // axis should be a unit vector
+  // from: https://inside.mines.edu/~gmurray/ArbitraryAxisRotation/
+  double cosT = cos( theta );
+  double sinT = sin( theta );
+  double u2 = u*u;
+  double v2 = v*v;
+  double w2 = w*w;
+
+  double mat_data[] = { u2+(v2+w2)*cosT,      u*v*(1-cosT)-w*sinT,  u*w*(1-cosT)+v*sinT,   0, 
+                        u*v*(1-cosT)+w*sinT,  v2+(u2+w2)*cosT,      v*w*(1-cosT)+u*sinT,   0, 
+                        u*w*(1-cosT)+v*sinT,  v*w*(1-cosT)+u*sinT,  w2+(u2+v2)*cosT,       0, 
+                        0,                  0,                      0,                     1 };
+  return matrix( 4 , 4 , mat_data ) ;
+}
+
 matrix makeRotateZMatrix( double ccwThetaFromX )
 {
   double cosTheta = cos( ccwThetaFromX ), sinTheta = sin( ccwThetaFromX ), mat_data[] = { cosTheta,-sinTheta,0,0, sinTheta,cosTheta,0,0, 0,0,1,0, 0,0,0,1 };
