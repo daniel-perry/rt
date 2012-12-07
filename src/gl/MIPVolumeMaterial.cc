@@ -8,7 +8,10 @@
 #include "Scene.h"
 
 // libs
-#include <NrrdIO.h>
+//#include <NrrdIO.h>
+#include <itkImage.h>
+#include <itkImageFileReader.h>
+#include <itkExceptionObject.h>
 
 // std
 #include <cmath>
@@ -60,14 +63,24 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
       lower_int[2]--;
 
 
-    double v000 = data[lower_int[0]][lower_int[1]][lower_int[2]],
-           v100 = data[lower_int[0]+1][lower_int[1]][lower_int[2]],
-           v110 = data[lower_int[0]+1][lower_int[1]+1][lower_int[2]],
-           v111 = data[lower_int[0]+1][lower_int[1]+1][lower_int[2]+1],
-           v010 = data[lower_int[0]][lower_int[1]+1][lower_int[2]],
-           v011 = data[lower_int[0]][lower_int[1]+1][lower_int[2]+1],
-           v001 = data[lower_int[0]][lower_int[1]][lower_int[2]+1],
-           v101 = data[lower_int[0]+1][lower_int[1]][lower_int[2]+1];
+    ImageType::IndexType ind = {{ lower_int[0], lower_int[1], lower_int[2] }};
+    double v000 = data->GetPixel(ind);
+    ind[0]+=1;
+    double v100 = data->GetPixel(ind);
+    ind[1]+=1;
+    double v110 = data->GetPixel(ind);
+    ind[2]+=1;
+    double v111 = data->GetPixel(ind);
+    ind[0]-=1;
+    double v011 = data->GetPixel(ind); 
+    ind[2]-=1;
+    double v010 = data->GetPixel(ind);
+    ind[1]-=1;
+    ind[2]+=1;
+    double v001 = data->GetPixel(ind);
+    ind[0]+=1;
+    double v101 = data->GetPixel(ind);
+
     double value = 0.f;
     if(nearest) // nearest neighbor
     {
@@ -87,6 +100,7 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
 
     float opacity;
     Color color;
+
     cmap.lookup( (float)value , opacity , color );
 
     color = color * opacity;
@@ -94,11 +108,12 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
     float intensity = (color.r() + color.g() + color.b())/3.f;
     if(intensity > max_intensity)
     {
+      //accum_color = rgb(1,0,0) * .5;
       accum_color = color;
     }
     t += world_stepsize;
   }
- 
+
   // volume should be "see-through", so now going to cast ray behind it...
   //(may need to add safety small vector to new_r origin.....)
   /*
@@ -144,6 +159,26 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& data_fn,
   bounds[0] = lower;
   bounds[1] = upper;
 
+  typedef itk::ImageFileReader<ImageType> Reader;
+  Reader::Pointer reader = Reader::New();
+  reader->SetFileName(data_fn);
+  try
+  {
+    reader->Update();
+  }
+  catch(itk::ExceptionObject e)
+  {
+    std::cerr << "Error reading file " << data_fn << ": " << e << std::endl;
+    exit(1);
+  }
+  data = reader->GetOutput();
+
+  size1 = data->GetLargestPossibleRegion().GetSize()[0];
+  size2 = data->GetLargestPossibleRegion().GetSize()[1];
+  size3 = data->GetLargestPossibleRegion().GetSize()[2];
+
+
+  /*
   Nrrd *nin;
   nin = nrrdNew(); // empty container
   if (nrrdLoad(nin, data_fn.c_tr(), NULL)) 
@@ -157,6 +192,7 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& data_fn,
   int ny = nin->axis[1].size;
   int nz = nin->axis[2].size;
   std::cerr << "Finished reading " << data_fn << ": " << nx << "," << ny << "," <<nz << std::endl;
+  */
   
 
   /*
@@ -196,7 +232,7 @@ MIPVolumeMaterial::MIPVolumeMaterial(const std::string& data_fn,
   }
   */
 
-  cellsize = diag * Vector(1./(nx-1), 1./(ny-1), 1./(nz-1));
+  cellsize = diag * Vector(1./(size1-1), 1./(size2-1), 1./(size3-1));
 
   /*
   // get the folder of the header.. data volume is relative to that..

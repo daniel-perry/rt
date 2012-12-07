@@ -1,18 +1,6 @@
 PROJECT( rt )
 cmake_minimum_required(VERSION 2.8)  
 
-# required for opengl based viewer
-# (the command line version rt, can be compiled w/o this stuff)
-find_package(GLUT REQUIRED)
-include_directories( ${GLUT_INCLUDE_DIRS} )
-find_package(OpenGL REQUIRED)
-include_directories( ${OpenGL_INCLUDE_DIRS} )
-find_package(Threads REQUIRED)
-include_directories( ${Threads_INCLUDE_DIRS} )
-find_package(Teem REQUIRED) # version 1.10.0
-include_directories( ${Teem_INCLUDE_DIRS} )
-
-
 #Match everything when analyzing dependencies
 INCLUDE_REGULAR_EXPRESSION("^.*$")
 OPTION (BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -23,6 +11,22 @@ IF (WIN32 AND MSVC)
 ENDIF (WIN32 AND MSVC)
 
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# required for opengl based viewer
+# (the command line version rt, can be compiled w/o this stuff)
+find_package(GLUT REQUIRED)
+include_directories( ${GLUT_INCLUDE_DIRS} )
+find_package(OpenGL REQUIRED)
+include_directories( ${OpenGL_INCLUDE_DIRS} )
+find_package(Threads REQUIRED)
+include_directories( ${Threads_INCLUDE_DIRS} )
+#find_package(Teem REQUIRED) # version 1.10.0
+#include_directories( ${Teem_INCLUDE_DIRS} )
+
+FIND_PACKAGE(ITK REQUIRED)
+IF (ITK_FOUND)
+  INCLUDE (${USE_ITK_FILE})
+ENDIF(ITK_FOUND)
 
 SET( gl_HDRS
   gl/AxisBox.h
@@ -136,11 +140,12 @@ SET( rt_SRCS
 ADD_EXECUTABLE( rt
                 ${rt_HDRS}
                 ${rt_SRCS}
-                ${Teem_LIBRARY}
+                #${Teem_LIBRARY}
 				      )
 
 TARGET_LINK_LIBRARIES(  rt
                         gl
+                        ${ITK_LIBRARIES}
                      ) 
 
 ###################
@@ -174,5 +179,6 @@ TARGET_LINK_LIBRARIES( viewer
                        ${OPENGL_LIBRARY}
                        #${Threads_LIBRARY}
                        ${CMAKE_THREAD_LIBS_INIT}
-                       ${Teem_LIBRARY}
+                       #${Teem_LIBRARY}
+                       ${ITK_LIBRARIES}
                      )

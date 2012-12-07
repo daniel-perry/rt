@@ -40,7 +40,7 @@ void Colormap::rescale(double stepsize)
   scaled_data.resize(input_data.size());
   for(int i=0;i<static_cast<int>(scaled_data.size());i++){
     Data d = input_data[i];
-    d.opacity = 1-std::exp(-d.opacity  * stepsize);
+    //d.opacity = 1-std::exp(-d.opacity  * stepsize);
     scaled_data[i] = d;
   }
 }

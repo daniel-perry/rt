@@ -13,8 +13,10 @@ Scene* make_scene()
 
   // maximum intensity based volume material
   Material* volume = new MIPVolumeMaterial( 
-   "../data/CThead.hdr", // data hdr name
-   "../data/CThead.cmap", // color map name
+   //"../data/CThead.hdr", // data hdr name
+   //"../data/CThead.cmap", // color map name
+   "../data/two_dist.nrrd", // data hdr name
+   "../data/two_dist.cmap", // color map name
    Point(0,0,0), // lower
    Point(.75,1,1), // upper
    0.5,  // grid stepsize

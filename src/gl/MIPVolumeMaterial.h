@@ -8,6 +8,8 @@
 #include "Material.h"
 #include "Colormap.h"
 
+#include <itkImage.h>
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -41,7 +43,10 @@ class MIPVolumeMaterial : public Material
   bool nearest;
   
   Point diag, cellsize;
-  short *** data; //3d array.
+  //short *** data; //3d array.
+  typedef itk::Image<short,3> ImageType;
+  ImageType::Pointer data; 
+
   int size1,size2,size3; //size of each array dimension.
 
 };
