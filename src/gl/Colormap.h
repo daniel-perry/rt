@@ -9,6 +9,7 @@
 #include "rgb.h"
 
 #include <string>
+#include <sstream>
 #include <vector>
 
 class Colormap {
@@ -45,6 +46,12 @@ class Colormap {
     float value;
     float opacity;
     Color color;
+    std::string toString()
+    {
+      std::stringstream s;
+      s << value << "; " << color << "; " << opacity;
+      return s.str();
+    }
   };
   std::vector<Data> input_data;
   std::vector<Data> scaled_data;
