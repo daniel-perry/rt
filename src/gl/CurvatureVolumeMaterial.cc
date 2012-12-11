@@ -12,6 +12,7 @@
 #include <itkImage.h>
 #include <itkImageFileReader.h>
 #include <itkExceptionObject.h>
+#include <itkNumericTraits.h>
 
 // std
 #include <cmath>
@@ -21,6 +22,19 @@ using namespace std;
 
 void CurvatureVolumeMaterial::preprocess(){}
 
+template<class HessianType, class GradientType >
+HessianType outer_product( const GradientType & v1, const GradientType & v2 )
+{
+  HessianType m;
+  for( size_t r=0; r<v1.Size(); ++r )
+  {
+    for( size_t c=0; c<v2.Size(); ++c )
+    {
+      m[r][c] = v1[r] * v2[c];
+    }
+  }
+  return m;
+}
 
 void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth, double attenuation) const{
 
@@ -99,11 +113,52 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
               v111 * P_diff.x() * P_diff.y() * P_diff.z();
     }
 
-
-
     float opacity;
     Color color;
     cmap.lookup( (float)value , opacity , color );
+
+    //if( 750 <= value && value <= 900 && opacity > 0 )
+    //if( 1150 <= value && value <= 1250 && opacity > 0 )
+    if( 110 <= value && value <= 120 && opacity > 0 )
+    {
+      // get the gradient and hessian for this point:
+      for(size_t loc=0; loc<3; ++loc)
+        ind[loc] = lower_int[loc];
+      GradientType g = gradient->GetPixel(ind);
+      HessianType H = hessian->GetPixel(ind);
+      
+      float g_mag = g.GetNorm();
+      GradientType n = -g / g_mag;
+      MatrixType P;
+      P.SetIdentity();
+      P = P - outer_product<MatrixType,GradientType>( n, n );
+      MatrixType G = (P*-1) * H.PostMultiply(P);
+      //MatrixType G = P * H.PostMultiply(P);
+      G /= g_mag;
+
+      // convert vector3d to itk::CovariantVector
+      GradientType v;
+      Vector v_data = r.direction();
+      for(size_t vi=0; vi<v.Size(); ++vi)
+        v[vi] = v_data[vi];
+      
+      float num = v * ( G * v );
+      float den = v * ( P * v );
+
+      float k_v = num / (den + itk::NumericTraits<float>::min());
+
+      float T = 10.f; // TODO: find good value...
+
+      float boundary = std::sqrt( T * k_v * (2-T*k_v) );
+
+      float intersection_cosine = fabs(dot(v_data, hit.normal));
+
+      if( intersection_cosine <= boundary )
+      {
+        color = Color(1.f,1.f,1.f); // white..
+      }
+
+    }
 
     accum_color += color * opacity * (1-accum_opacity);
     accum_opacity += opacity*(1-accum_opacity);
@@ -167,6 +222,39 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
     exit(1);
   }
   data = reader->GetOutput();
+
+
+  std::cerr << "computing gradient and hessian... " << std::endl;
+
+  GradientFilter::Pointer gradientFilter = GradientFilter::New();
+  gradientFilter->SetSigma(1.0);
+  gradientFilter->SetInput( data );
+  gradient = gradientFilter->GetOutput();
+  try
+  {
+    gradientFilter->Update();
+  }
+  catch(itk::ExceptionObject e)
+  {
+    std::cerr << "Error computing gradient: " << e << std::endl;
+    exit(1);
+  }
+ 
+  HessianFilter::Pointer hessianFilter = HessianFilter::New();
+  hessianFilter->SetSigma(1.0);
+  hessianFilter->SetInput( data );
+  hessian = hessianFilter->GetOutput();
+  try
+  {
+    hessianFilter->Update();
+  }
+  catch(itk::ExceptionObject e)
+  {
+    std::cerr << "Error computing hessian: " << e << std::endl;
+    exit(1);
+  }
+
+  std::cerr << "done computing gradient and hessian." << std::endl;
 
   size1 = data->GetLargestPossibleRegion().GetSize()[0];
   size2 = data->GetLargestPossibleRegion().GetSize()[1];

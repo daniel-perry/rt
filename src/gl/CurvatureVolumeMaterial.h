@@ -9,6 +9,8 @@
 #include "Colormap.h"
 
 #include <itkImage.h>
+#include <itkGradientRecursiveGaussianImageFilter.h>
+#include <itkHessianRecursiveGaussianImageFilter.h>
 
 #include <iostream>
 #include <vector>
@@ -44,8 +46,18 @@ class CurvatureVolumeMaterial : public Material
   
   Point diag, cellsize;
   //short *** data; //3d array.
-  typedef itk::Image<short,3> ImageType;
+  typedef float PixelType;
+  typedef itk::Image<PixelType,3> ImageType;
+  typedef itk::GradientRecursiveGaussianImageFilter<ImageType> GradientFilter;
+  typedef itk::HessianRecursiveGaussianImageFilter<ImageType> HessianFilter; 
+  typedef GradientFilter::OutputImageType GradientImageType;
+  typedef GradientImageType::PixelType GradientType;
+  typedef HessianFilter::OutputImageType HessianImageType;
+  typedef HessianImageType::PixelType HessianType;
+  typedef HessianType::MatrixType MatrixType;
   ImageType::Pointer data; 
+  GradientImageType::Pointer gradient; // first derivative
+  HessianImageType::Pointer hessian; // second derivative
 
   int size1,size2,size3; //size of each array dimension.
 

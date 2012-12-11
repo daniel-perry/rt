@@ -13,8 +13,10 @@ Scene* make_scene()
 
   // maximum intensity based volume material
   Material* volume = new CurvatureVolumeMaterial( 
-   "../data/volume-tooth/tooth.nhdr", // data hdr name
-   "../data/volume-tooth/tooth.cmap", // color map name
+   //"../data/volume-tooth/tooth.nhdr", // data hdr name
+   //"../data/volume-tooth/tooth.cmap", // color map name
+   "../data/BostonTeapot.nhdr", // data hdr name
+   "../data/BostonTeapot.cmap", // color map name
    Point(0,0,0), // lower
    Point(.75,1,1), // upper
    0.5,  // grid stepsize
