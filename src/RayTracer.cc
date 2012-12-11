@@ -3,7 +3,9 @@
 #include "RayTracer.h"
 
 //#include "sphere_scene.h" 
-#include "volume_scene.h"
+//#include "volume_scene.h"
+#include "volume_scene_two_dist.h"
+//#include "volume_scene_tooth.h"
 
 RayTracer::RayTracer(int width, int height)
 :m_scene(0),

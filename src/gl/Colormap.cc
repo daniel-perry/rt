@@ -38,9 +38,12 @@ Colormap::~Colormap()
 void Colormap::rescale(double stepsize)
 {
   scaled_data.resize(input_data.size());
+  std::cerr << "color map:\n"
+            << "v ; r, g, b; o" << std::endl;
   for(int i=0;i<static_cast<int>(scaled_data.size());i++){
     Data d = input_data[i];
     //d.opacity = 1-std::exp(-d.opacity  * stepsize);
     scaled_data[i] = d;
+    std::cerr << d.toString() << std::endl;
   }
 }
