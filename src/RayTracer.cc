@@ -7,7 +7,9 @@
 //#include "volume_scene_two_dist_mip.h"
 //#include "volume_scene_tooth_mip.h"
 //#include "volume_scene_two_dist.h"
-#include "volume_scene_tooth.h"
+//#include "volume_scene_tooth.h"
+//#include "volume_scene_two_dist_curv.h"
+#include "volume_scene_tooth_curv.h"
 
 RayTracer::RayTracer(int width, int height)
 :m_scene(0),
