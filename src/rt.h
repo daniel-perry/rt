@@ -23,6 +23,7 @@
 #include "gl/CoupledMaterial.h"
 #include "gl/PhongVolumeMaterial.h"
 #include "gl/MIPVolumeMaterial.h"
+#include "gl/VolumeMaterial.h"
 
 #include "gl/Colormap.h"
 
