@@ -50,7 +50,7 @@ class Triangle : public Primitive
   
   BBox getBBox(); 
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const;
 
   vector3d p0,p1,p2,Normal;
   Material * material;

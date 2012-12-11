@@ -13,7 +13,7 @@
 #include "Primitive.h"
 #include "Scene.h"
 
-void DielectricMaterial::shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const{
+void DielectricMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth, double attenuation) const{
   
   HitRecord tempHit;
   vector3d pt = r.eval( hit.t );

@@ -13,7 +13,7 @@
 #include <math.h>
 #include "BBox.h"
 
-bool Ring::intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+bool Ring::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const{
   double cosTheta = dot( r.direction() , Normal );
   if( fabs( cosTheta) > MYMIN){ // NOT parallel to plane in which disk resides
     

@@ -40,7 +40,7 @@ class Ring : public Primitive
 
 
 
-  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r );
+  bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const;
   
   // normal returned is guaranteed to be normalized.
    vector3d normal( const vector3d & p ) const{

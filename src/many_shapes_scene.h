@@ -20,7 +20,7 @@ Scene* make_scene()
                               Point(-3.3, -3.3, 2.5), .5));
   Material* hfmatl = new LambertianMaterial(Color(1, 1, 0), .8, .2);
   world->addObject(new Heightfield(hfmatl,
-                                   "sinc_200_200.hf",
+                                   "../data/sinc_200_200.hf",
                                    Point(0, -3, 2), Point(3, 0, 4)));
   scene->setObject(world);
 
@@ -31,7 +31,13 @@ Scene* make_scene()
   scene->setCamera(new PinholeCamera(Point(6, -18, 8.5),
                                      Point(-.5,0, 2.5),
                                      Vector(0, 0, 1),
-                                     30));
+                                     30, 1));
+  scene->setMaxRayDepth(10);
+  scene->setMinAttenuation(.01);
+  scene->setSampler( new UniformSample( 1 , scene));
+  //scene->setSampler( new JitteredSample( 9 , scene));
+  scene->setFilter( new BoxFilter() );
+
 
   return scene;
 }

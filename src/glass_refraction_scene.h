@@ -11,8 +11,8 @@ Scene* make_scene()
   scene->setBackground(new ConstantBackground(Color(0.5, 0.8, 0.9)));
   Group* world = new Group();
   Material* groundmatl = new LambertianMaterial(Color(0.95, 0.65, 0.35), .6, .4);
-  world->addObject(new Plane(groundmatl,
-                             Vector(0,0,1), Point(0,0,2.5)));
+  //world->addObject(new Plane(groundmatl,
+  //                           Vector(0,0,1), Point(0,0,2.5)));
 
   
   for(int i=0;i<4;i++){
@@ -37,7 +37,7 @@ Scene* make_scene()
 
   Material* hfmatl = new PhongMaterial(Color(0.5, 0.6, .3), 0.6, 0.4, Color(1,1,1), 30);
   world->addObject(new Heightfield(hfmatl,
-                                   "/home/dperry/school/cs6620/rt/src/sinc_200_200.hf",
+                                   "../data/sinc_200_200.hf",
                                    Point(-4.5, 2.0, 2), Point(-1.5, 5.0 , 4)));
   scene->setObject(world);
 

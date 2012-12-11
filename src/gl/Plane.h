@@ -15,7 +15,9 @@
 #include "Primitive.h"
 #include "vector3d.h"
 #include "util.h"
-#include <math.h>
+#include <cmath>
+#include <string>
+#include <sstream>
 
 class Plane : public Primitive
 {
@@ -37,7 +39,6 @@ class Plane : public Primitive
     
   }
   
-
   bool intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const{
     double cosTheta = dot( r.direction() , norm );
     if( fabs(cosTheta) > MYMIN ){ // not parallel to plane, and so has to intersect it(considering an infinate plane). - MYMIN acts as a sort of cut-off point as well.
@@ -48,7 +49,28 @@ class Plane : public Primitive
     
    
   }
-  
+
+  std::string toString() {
+    std::stringstream s;
+    s << "Plane (pt=" << point << "; norm=" << norm  << ")";
+    return s.str();
+  }
+
+  BBox getBBox() {
+
+    //ray r(point,norm);
+    //Point above = r.eval(0.1);
+    //Point below = r.eval(-0.1);
+
+    // for now just use a huge bounding box..
+    // TODO: restrict the bbox by the delta +/- surface of the plane
+
+    Point min( -MYMAX , -MYMAX , -MYMAX) , 
+    max ( MYMAX, MYMAX, MYMAX ); 
+
+    return BBox( min , max );
+  } 
+
   // normal returned is guaranteed to be normalized.
   vector3d  normal( const vector3d & p ) const{ return norm;}
 

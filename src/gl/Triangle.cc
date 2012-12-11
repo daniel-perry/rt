@@ -22,7 +22,7 @@ BBox Triangle::getBBox(){
   return BBox( min , max );
 }
 
-bool Triangle::intersect(  HitRecord & hit , const RenderContext & context, const ray & r ){
+bool Triangle::intersect(  HitRecord & hit , const RenderContext & context, const ray & r ) const {
   //  cerr<<"triangle intersect"<<endl;
   double t, beta, gamma;
 

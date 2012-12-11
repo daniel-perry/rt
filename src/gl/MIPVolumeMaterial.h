@@ -1,4 +1,4 @@
-/* MIPVolumeMaterial: volume rendering using the Phong lighting model.
+/* MIPVolumeMaterial: volume rendering using maximum intensity projection (MIP)
  */
 
 

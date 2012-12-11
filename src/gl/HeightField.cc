@@ -62,7 +62,7 @@ void HeightField::readHF(const char * hf_filename){
   bounds[1] = Pmax;
 }
 
-bool HeightField::intersect( HitRecord & hit , const RenderContext & context, const ray & r ){
+bool HeightField::intersect( HitRecord & hit , const RenderContext & context, const ray & r ) const {
   double t0 = MYMIN , t1 = MYMAX;
   double tmin,tmax,tymin,tymax,tzmin,tzmax;
   vector3d n_min,n_max;
@@ -238,8 +238,10 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 	      b = (S.y()-C.y())/cellsize.y();//v
 	      a = fmin( 0. , fmax( 1. , a ) );
 	      b = fmin( 0. , fmax( 1. , b ) );
-	      Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
-	      Normal.MakeUnitVector();
+	      hit.normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      hit.normal.MakeUnitVector();
+	      //Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      //Normal.MakeUnitVector();
 	      return true;
 	    }else{
 	      return false;
@@ -265,8 +267,10 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 		b = (S.y()-C.y())/cellsize.y();//v
 		a = fmin( 0. , fmax( 1. , a ) );
 		b = fmin( 0. , fmax( 1. , b ) );
-		Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
-		Normal.MakeUnitVector();
+		hit.normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+		hit.normal.MakeUnitVector();
+		//Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+		//Normal.MakeUnitVector();
 		return true;
 	      }
 	      else{
@@ -280,8 +284,10 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 	      b = (S.y()-C.y())/cellsize.y();//v
 	      a = fmin( 0. , fmax( 1. , a ) );
 	      b = fmin( 0. , fmax( 1. , b ) );
-	      Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
-	      Normal.MakeUnitVector();
+	      hit.normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      hit.normal.MakeUnitVector();
+	      //Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      //Normal.MakeUnitVector();
 	      return true;
 	    }else{
 	      return false;
@@ -295,8 +301,10 @@ bool HeightField::intersect( HitRecord & hit , const RenderContext & context, co
 	      b = (S.y()-C.y())/cellsize.y();//v
 	      a = fmin( 0. , fmax( 1. , a ) );
 	      b = fmin( 0. , fmax( 1. , b ) );
-	      Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
-	      Normal.MakeUnitVector();
+	      hit.normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      hit.normal.MakeUnitVector();
+	      //Normal = vector3d(-((Zu+b*Zuv)/cellsize.x()),-((Zv+a*Zuv)/cellsize.y()),1);
+	      //Normal.MakeUnitVector();
 	      return true;
 	    }else{
 	      return false;

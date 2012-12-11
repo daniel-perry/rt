@@ -23,7 +23,12 @@ class DielectricMaterial : public Material
     R*=R;
   }
 
-  void shade( rgb & result, const RenderContext & context, const ray & r, const HitRecord & hit, int depth, double attenuation) const;
+  void shade( rgb & result, 
+              const RenderContext & context, 
+              const ray & r, 
+              HitRecord & hit, 
+              int depth, 
+              double attenuation) const;
 
   double Refraction; // index of refraction
   double Exponent; // specular exponent
