@@ -4,28 +4,28 @@ import vtk
 
 def main(argv):
   if len(argv) < 2:
-    print "usage:",argv[0]," data.nrrd"
+    print "usage:",argv[0]," data.nrrd data.cmap"
     exit(1)
   data_fn = argv[1]
+  cmap_fn = argv[2]
   reader = vtk.vtkPNrrdReader()
   reader.SetFileName(data_fn)
   reader.Update()
   data = reader.GetOutput()
   # opacity function
   opacityFunction = vtk.vtkPiecewiseFunction()
-  opacityFunction.AddPoint(0, 0.0)
-  opacityFunction.AddPoint(50, 0.5)
-  opacityFunction.AddPoint(340, 0.0)
-  opacityFunction.AddPoint(800, 0.5)
-  opacityFunction.AddPoint(1000, 0.0)
-  opacityFunction.AddPoint(1180, 0.5)
   # color function
   colorFunction = vtk.vtkColorTransferFunction()
-  colorFunction.AddRGBPoint(0, 0.0, 0.0, 0.0)
-  colorFunction.AddRGBPoint(65, 0.3, 0.3, 0.3)
-  colorFunction.AddRGBPoint(340, 0.0, 0.0, 0.0)
-  colorFunction.AddRGBPoint(800, 0.5, 0.5, 0.5)
-  colorFunction.AddRGBPoint(1180, 0.8, 0.8, 0.8)
+  cmap = open(cmap_fn, 'r')
+  for line in cmap.readlines():
+    parts = line.split()
+    value = float(parts[0])
+    r = float(parts[1])
+    g = float(parts[2])
+    b = float(parts[3])
+    a = float(parts[4])
+    opacityFunction.AddPoint(value, a)
+    colorFunction.AddRGBPoint(value, r, g, b)
   # volume setup:
   volumeProperty = vtk.vtkVolumeProperty()
   volumeProperty.SetColor(colorFunction)
