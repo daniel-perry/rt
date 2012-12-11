@@ -99,30 +99,36 @@ void MIPVolumeMaterial::shade( rgb & result, const RenderContext & context, cons
               v111 * P_diff.x() * P_diff.y() * P_diff.z();
     }
 
+
+
+    if( value > max_intensity ) max_intensity = value;
+    /*
     float opacity;
     Color color;
-
     cmap.lookup( (float)value , opacity , color );
-
     color = color * opacity;
-
     float intensity = (color.r() + color.g() + color.b())/3.f;
     if(intensity > max_intensity)
     {
       //accum_color = rgb(1,0,0) * .5;
       accum_color = color;
     }
+    */
+
     t += world_stepsize;
   }
 
+  float opacity;
+  Color color;
+  cmap.lookup( (float)max_intensity, opacity , color );
+  accum_color = opacity * color;
+
   // volume should be "see-through", so now going to cast ray behind it...
   //(may need to add safety small vector to new_r origin.....)
-  /*
   ray new_r( r.eval( t_exit ) , r.direction() );
   Color exit_color(0,0,0);
   context.scene->render( exit_color , new_r );
   accum_color += exit_color * (1-accum_opacity);
-  */
  
   result = accum_color;
 }
