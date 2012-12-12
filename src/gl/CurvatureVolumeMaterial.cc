@@ -24,10 +24,10 @@ using namespace std;
 
 void CurvatureVolumeMaterial::preprocess(){}
 
-template<class HessianType, class GradientType >
-HessianType outer_product( const GradientType & v1, const GradientType & v2 )
+template<class MatrixType, class VectorType >
+MatrixType outer_product( const VectorType & v1, const VectorType & v2 )
 {
-  HessianType m;
+  MatrixType m;
   for( size_t r=0; r<v1.Size(); ++r )
   {
     for( size_t c=0; c<v2.Size(); ++c )
@@ -36,6 +36,41 @@ HessianType outer_product( const GradientType & v1, const GradientType & v2 )
     }
   }
   return m;
+}
+
+// dot product between two different vector types
+template<class V1, class V2>
+float inner_product( const V1 & v1, const V2 & v2 )
+{
+  float dot = 0.f;
+  for(size_t i=0; i<v1.length(); ++i)
+  {
+    dot += v1[i]*v2[i];
+  }
+  return dot;
+}
+
+Color GoochShade( const Color & objectColor, float normalLightCosine )
+{
+  // see http://www.cs.northwestern.edu/~ago820/SIG98/paper/node6.html
+
+  Color blue(0.f,0.f,1.f);
+  Color yellow(1.f,1.f,0.f);
+  Color black(0.f,0.f,0.f);
+
+  float coolPart = 0.15;
+  Color objectCool = (1-coolPart)*black + coolPart*objectColor;
+  float warmPart = 0.5;
+  Color objectWarm = (1-warmPart)*black + warmPart*objectColor;
+  
+  float darken = 0.4;
+  Color cool = darken*blue + objectCool;
+  Color warm = darken*yellow + objectWarm;
+
+  float lightPart = (1+normalLightCosine)/2;
+  Color result =  lightPart * cool + (1-lightPart) * warm;
+
+  return result;
 }
 
 void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context, const ray & r, HitRecord & hit, int depth, double attenuation) const{
@@ -61,8 +96,8 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
   float max_intensity = 0;
 
   while( t < t_exit ){
-    Point P = r.eval( t );
-    P = P - lower;
+    Point pt = r.eval( t );
+    Point P = pt - lower;
     P = P / diag;
     for(size_t i=0; i<3; ++i) if(P[i] < 0) P[i] = 0;
     P = P * vector3d( (size1-1) , (size2-1) , (size3-1) );
@@ -122,7 +157,9 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
     //if( 750 <= value && value <= 900 && opacity > 0 )
     //if( 1150 <= value && value <= 1250 && opacity > 0 )
     //if( 110 <= value && value <= 120 && opacity > 0 )
+    if( opacity > 0 )
     {
+
       // get the gradient and hessian for this point:
       for(size_t loc=0; loc<3; ++loc)
         ind[loc] = lower_int[loc];
@@ -157,6 +194,12 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
       float fuzzy_boundary = 0.5f;
       float diff = intersection_cosine - boundary;
+
+      // Convert to gooch shaded color:
+      Color lightColor;
+      Vector lightDir;
+      float lightDistance = context.scene->lights[0]->getLight( lightColor , lightDir , context , pt );
+      color = GoochShade( color, inner_product(lightDir, n ) );
 
       //if( intersection_cosine <= boundary + fuzzy_boundary )
       if( diff <= fuzzy_boundary )
