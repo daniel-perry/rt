@@ -13,6 +13,8 @@
 #include <itkImageFileReader.h>
 #include <itkExceptionObject.h>
 #include <itkNumericTraits.h>
+#include <itkCurvatureAnisotropicDiffusionImageFilter.h>
+#include <itkGradientAnisotropicDiffusionImageFilter.h>
 
 // std
 #include <cmath>
@@ -132,8 +134,8 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
       MatrixType P;
       P.SetIdentity();
       P = P - outer_product<MatrixType,GradientType>( n, n );
-      MatrixType G = (P*-1) * H.PostMultiply(P);
-      //MatrixType G = P * H.PostMultiply(P);
+      //MatrixType G = (P*-1) * H.PostMultiply(P);
+      MatrixType G = P * H.PostMultiply(P);
       G /= g_mag;
 
       // convert vector3d to itk::CovariantVector
@@ -147,22 +149,22 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
       float k_v = num / (den + itk::NumericTraits<float>::min());
 
-      float T = 2.f; // TODO: find good value...
+      float T = 0.5f; //  ~= num pixels to shade..
 
       float boundary = std::sqrt( T * k_v * (2-T*k_v) );
 
-      float intersection_cosine = fabs(dot(v_data, hit.normal));
+      float intersection_cosine = fabs(v * n);
 
-      float fuzzy_boundary = 1.f;
+      float fuzzy_boundary = 0.5f;
       float diff = intersection_cosine - boundary;
 
       //if( intersection_cosine <= boundary + fuzzy_boundary )
       if( diff <= fuzzy_boundary )
       {
-        float g = 1.f;
+        float interp = 1.f;
         if( diff > 0 )
-          g = diff/fuzzy_boundary;
-        color = g * Color(1.f,1.f,1.f);
+          interp = 1-diff/fuzzy_boundary;
+        color = (1-interp) * color + interp * Color(1.f,1.f,1.f);
       }
 
     }
@@ -228,7 +230,27 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
     std::cerr << "Error reading file " << data_fn << ": " << e << std::endl;
     exit(1);
   }
-  data = reader->GetOutput();
+
+  std::cerr << "smoothing data... " << std::endl;
+  //typedef itk::CurvatureAnisotropicDiffusionImageFilter<ImageType,ImageType> SmoothFilter;
+  typedef itk::GradientAnisotropicDiffusionImageFilter<ImageType,ImageType> SmoothFilter;
+  SmoothFilter::Pointer smoother = SmoothFilter::New();
+  smoother->SetInput(reader->GetOutput());
+  smoother->SetNumberOfIterations(2);
+  smoother->SetConductanceParameter(1.2);
+
+  try
+  {
+    smoother->Update();
+  }
+  catch(itk::ExceptionObject e)
+  {
+    std::cerr << "Error smoothing image: " << e << std::endl;
+    exit(1);
+  }
+
+  //data = reader->GetOutput();
+  data = smoother->GetOutput();
 
 
   std::cerr << "computing gradient and hessian... " << std::endl;
