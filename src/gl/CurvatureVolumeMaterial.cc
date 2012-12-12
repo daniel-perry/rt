@@ -119,7 +119,7 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
     //if( 750 <= value && value <= 900 && opacity > 0 )
     //if( 1150 <= value && value <= 1250 && opacity > 0 )
-    if( 110 <= value && value <= 120 && opacity > 0 )
+    //if( 110 <= value && value <= 120 && opacity > 0 )
     {
       // get the gradient and hessian for this point:
       for(size_t loc=0; loc<3; ++loc)
@@ -147,15 +147,22 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
       float k_v = num / (den + itk::NumericTraits<float>::min());
 
-      float T = 10.f; // TODO: find good value...
+      float T = 2.f; // TODO: find good value...
 
       float boundary = std::sqrt( T * k_v * (2-T*k_v) );
 
       float intersection_cosine = fabs(dot(v_data, hit.normal));
 
-      if( intersection_cosine <= boundary )
+      float fuzzy_boundary = 1.f;
+      float diff = intersection_cosine - boundary;
+
+      //if( intersection_cosine <= boundary + fuzzy_boundary )
+      if( diff <= fuzzy_boundary )
       {
-        color = Color(1.f,1.f,1.f); // white..
+        float g = 1.f;
+        if( diff > 0 )
+          g = diff/fuzzy_boundary;
+        color = g * Color(1.f,1.f,1.f);
       }
 
     }
