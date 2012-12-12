@@ -9,10 +9,13 @@
 //#include "volume_scene_two_dist.h"
 //#include "volume_scene_tooth.h"
 //#include "volume_scene_two_dist_curv.h"
-#include "volume_scene_tooth_curv.h"
+//#include "volume_scene_tooth_curv.h"
+#include "volume_scene_curv.h"
 
 RayTracer::RayTracer(int width, int height)
 :m_scene(0),
+m_width(width),
+m_height(height),
 m_rc(),
 m_buffer(0),
 m_numComponents(4), // default r,g,b,a
@@ -21,13 +24,7 @@ m_doneRendering(0),
 m_numThreads(10),
 m_threads(0),
 m_regions(0)
-{
-  m_scene = make_scene();
-  m_rc.scene = m_scene;
-  m_scene->m_rc = m_rc;
-
-  setSize(width,height);
-}
+{}
 
 RayTracer::~RayTracer()
 {
@@ -36,8 +33,18 @@ RayTracer::~RayTracer()
   if(m_buffer) delete[] m_buffer;
 }
 
+void RayTracer::makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped )
+{
+  m_scene = make_scene(nrrd_fn, cmap_fn, curvThick, normFlipped);
+  m_rc.scene = m_scene;
+  m_scene->m_rc = m_rc;
+  setSize(m_width,m_height);
+}
+
 void RayTracer::setSize(int width, int height)
 { 
+  m_width = width;
+  m_height = height;
   m_scene->imageX = width;
   m_scene->imageY = height;
   if(m_buffer) delete[] m_buffer;

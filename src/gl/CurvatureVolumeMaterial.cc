@@ -171,8 +171,11 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
       MatrixType P;
       P.SetIdentity();
       P = P - outer_product<MatrixType,GradientType>( n, n );
-      //MatrixType G = (P*-1) * H.PostMultiply(P);
-      MatrixType G = P * H.PostMultiply(P);
+      MatrixType G;
+      if(normalFlipped)
+        G = P * H.PostMultiply(P);
+      else
+        G = (P*-1) * H.PostMultiply(P);
       G /= g_mag;
 
       // convert vector3d to itk::CovariantVector
@@ -186,13 +189,13 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
       float k_v = num / (den + itk::NumericTraits<float>::min());
 
-      float T = 0.5f; //  ~= num pixels to shade..
+      float T = 0.75 * curvThick; //  ~= num pixels to shade..
 
       float boundary = std::sqrt( T * k_v * (2-T*k_v) );
 
       float intersection_cosine = fabs(v * n);
 
-      float fuzzy_boundary = 0.5f;
+      float fuzzy_boundary = curvThick - T;
       float diff = intersection_cosine - boundary;
 
       // Convert to gooch shaded color:
@@ -248,6 +251,8 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
                                          const Point& upper,
                                          double grid_stepsize, 
                                          float maxopacity,
+                                         float curvThickness,
+                                         bool flipNormal,  
                                          bool nearest_neighbor
                                          )
 :cmap(cmap_fn), 
@@ -255,6 +260,8 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
  upper(upper), 
  grid_stepsize(grid_stepsize),
  maxopacity(maxopacity),
+ curvThick(curvThickness),
+ normalFlipped(flipNormal),
  nearest(nearest_neighbor)
 {
   diag = upper-lower;

@@ -27,7 +27,9 @@ class CurvatureVolumeMaterial : public Material
                       const Point& upper,
                       double grid_stepsize, 
                       float maxopacity,
-                      bool nearest_neighbor = true
+                      float curvThickness, // T-value ~= # pixels to shade
+                      bool flipNormal,  
+                      bool nearest_neighbor = false
                       );
 
   void preprocess();
@@ -58,6 +60,9 @@ class CurvatureVolumeMaterial : public Material
   ImageType::Pointer data; 
   GradientImageType::Pointer gradient; // first derivative
   HessianImageType::Pointer hessian; // second derivative
+
+  float curvThick;
+  bool normalFlipped;
 
   int size1,size2,size3; //size of each array dimension.
 

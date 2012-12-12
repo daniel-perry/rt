@@ -28,6 +28,10 @@ public:
   RayTracer(int width, int height);
   ~RayTracer();
 
+  /** setup the scene..
+   */
+  void makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped );
+
   /** update size
    */
   void setSize(int width, int height);
@@ -74,6 +78,8 @@ private:
 
   // holds the scene definition
   Scene * m_scene;
+  int m_width;
+  int m_height;
   RenderContext m_rc;
   // holds the rendered image
   typedef unsigned char buffer_type;
