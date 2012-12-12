@@ -47,6 +47,8 @@ std::string g_nrrd_fn;
 std::string g_cmap_fn;
 float g_curvThick; 
 bool g_normFlipped;
+// auto mode:
+bool g_automode = false;
 
 void DrawSquare(float x, float y) {
   glBegin(GL_QUADS);
@@ -283,6 +285,36 @@ void syncCamera()
   // else - do nothing
 }
 
+void updateAutomatic(int value)
+{
+  if( g_automode )
+  {
+    if(g_rayTracer->getState() == RayTracer::DONE)
+    {
+      rotateCamera( 0.5, 0 );
+      syncCamera();
+    }
+
+    // try again in 4 seconds..
+    glutTimerFunc(4000, updateAutomatic, 0);
+  }
+}
+
+void runAutomatic()
+{
+  if(g_automode)
+  {
+    // position initial camera position:
+    g_eye = Point(-2, -2, -0.5);
+    g_lookat = Point(0.5,0, 0.8);
+    g_nup = Vector(0, 0, 1);
+    syncCamera();
+    
+    // start regular intervals of camera rotation:
+    glutTimerFunc(4000, updateAutomatic, 0);
+  }
+}
+
 void MouseButton(int button, int state, int x, int y)
 {
   // Respond to mouse button presses.
@@ -388,6 +420,10 @@ void Keyboard(unsigned char key, int x, int y)
     g_eye -= (right * STEP_SIZE);
     g_lookat -= (right * STEP_SIZE);
     syncCamera();
+    break;
+  case 'A': // automatic mode
+    g_automode = !g_automode;
+    runAutomatic();
     break;
   }
 }
