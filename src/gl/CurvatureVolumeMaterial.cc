@@ -77,18 +77,17 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
 
   // find texit:
   double t_enter = hit.t, t_exit=t_enter;
-  vector3d safety_offset(1e-6,1e-6,1e-6);
+  vector3d safety_offset = r.direction() * 1e-2;
   ray r_inside( r.eval( hit.t ) + safety_offset , r.direction() );
   HitRecord hit_inside;
   hit_inside.t = MYMAX;
-  
+ 
   hit.prim->intersect( hit_inside , context , r_inside );
   if( hit_inside.t < MYMAX ){ // hit other side
     t_exit = t_enter+hit_inside.t;
   }
 
   double it = ceil( t_enter / grid_stepsize);
-  //double t = it * grid_stepsize;
   double t = t_enter;
 
   Color accum_color(0,0,0);
@@ -99,6 +98,7 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
     Point pt = r.eval( t );
     Point P = pt - lower;
     P = P / diag;
+
     for(size_t i=0; i<3; ++i) if(P[i] < 0) P[i] = 0;
     P = P * vector3d( (size1-1) , (size2-1) , (size3-1) );
     Point P_lower = vector3d( floor( P.x() ) , floor( P.y() ) , floor( P.z() ) );
@@ -114,32 +114,33 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
     if(lower_int[2] == (size3-1))
       lower_int[2]--;
 
-
-    ImageType::IndexType ind = {{ lower_int[0], lower_int[1], lower_int[2] }};
-    double v000 = data->GetPixel(ind);
-    ind[0]+=1;
-    double v100 = data->GetPixel(ind);
-    ind[1]+=1;
-    double v110 = data->GetPixel(ind);
-    ind[2]+=1;
-    double v111 = data->GetPixel(ind);
-    ind[0]-=1;
-    double v011 = data->GetPixel(ind); 
-    ind[2]-=1;
-    double v010 = data->GetPixel(ind);
-    ind[1]-=1;
-    ind[2]+=1;
-    double v001 = data->GetPixel(ind);
-    ind[0]+=1;
-    double v101 = data->GetPixel(ind);
-
     double value = 0.f;
     if(nearest) // nearest neighbor
     {
+      ImageType::IndexType ind = {{ lower_int[0], lower_int[1], lower_int[2] }};
+      double v000 = data->GetPixel(ind);
       value = v000;
     }
     else // linear interpolation
     {
+      ImageType::IndexType ind = {{ lower_int[0], lower_int[1], lower_int[2] }};
+      double v000 = data->GetPixel(ind);
+      ind[0]+=1;
+      double v100 = data->GetPixel(ind);
+      ind[1]+=1;
+      double v110 = data->GetPixel(ind);
+      ind[2]+=1;
+      double v111 = data->GetPixel(ind);
+      ind[0]-=1;
+      double v011 = data->GetPixel(ind); 
+      ind[2]-=1;
+      double v010 = data->GetPixel(ind);
+      ind[1]-=1;
+      ind[2]+=1;
+      double v001 = data->GetPixel(ind);
+      ind[0]+=1;
+      double v101 = data->GetPixel(ind);
+
       value = v000 * (1-P_diff.x())*(1-P_diff.y())*(1-P_diff.z()) +
               v100 * P_diff.x() * (1-P_diff.y())*(1-P_diff.z()) +
               v010 * (1-P_diff.x()) * P_diff.y() * (1-P_diff.z()) +
@@ -154,15 +155,11 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
     Color color;
     cmap.lookup( (float)value , opacity , color );
 
-    //if( 750 <= value && value <= 900 && opacity > 0 )
-    //if( 1150 <= value && value <= 1250 && opacity > 0 )
-    //if( 110 <= value && value <= 120 && opacity > 0 )
     if( opacity > 0 )
     {
 
       // get the gradient and hessian for this point:
-      for(size_t loc=0; loc<3; ++loc)
-        ind[loc] = lower_int[loc];
+      ImageType::IndexType ind = {{ lower_int[0], lower_int[1], lower_int[2] }};
       GradientType g = gradient->GetPixel(ind);
       HessianType H = hessian->GetPixel(ind);
       
@@ -210,7 +207,7 @@ void CurvatureVolumeMaterial::shade( rgb & result, const RenderContext & context
         float interp = 1.f;
         if( diff > 0 )
           interp = 1-diff/fuzzy_boundary;
-        color = (1-interp) * color + interp * Color(1.f,1.f,1.f);
+        color = (1-interp) * color + interp * Color(0.f,0.f,0.f);
       }
 
     }
@@ -340,106 +337,11 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
   size3 = data->GetLargestPossibleRegion().GetSize()[2];
 
 
-  /*
-  Nrrd *nin;
-  nin = nrrdNew(); // empty container
-  if (nrrdLoad(nin, data_fn.c_tr(), NULL)) 
-  {
-    err = biffGetDone(NRRD);
-    std::cerr << "CurvatureVolumeMaterial: trouble reading " << data_fn << ": " <<  err << std::endl;
-    free(err);
-    exit(1);
-  }
-  int nx = nin->axis[0].size;
-  int ny = nin->axis[1].size;
-  int nz = nin->axis[2].size;
-  std::cerr << "Finished reading " << data_fn << ": " << nx << "," << ny << "," <<nz << std::endl;
-  */
-  
-
-  /*
-  ifstream hdr(headername.c_str());
-  string volumename;
-  hdr >> volumename;
-  int nx, ny, nz;
-  hdr >> nx >> ny >> nz;
-  short offsetvalue;
-  hdr >> offsetvalue;
-  string fileendian;
-  hdr >> fileendian;
-  if(!hdr){
-    cerr << "Error reading header: " << headername << '\n';
-    exit(1);
-  }
-  if(fileendian != "BigEndian" && fileendian != "LittleEndian"){
-    cerr << "Bad data endian: " << fileendian << " in " << headername << "\n";
-    exit(1);
-  }
-  cerr << "Reading " << volumename << ": " << nx << 'x' << ny << 'x' << nz << '\n';
-  
-  //SETUP ARRAY TO HOLD DATA VALS AS SHORT's
-  //data.resize(nx, ny, nz);
-  size1 = nx;
-  size2 = ny;
-  size3 = nz;
-  data = new short**[size1];
-  for(int i=0;i<size1;i++){
-    data[i] = new short*[size2];
-  }
-  short * ptr = new short[nx*ny*nz]; // need the data to be contiguous
-  for( int i=0;i<size1;i++){
-    for(int j=0;j<size2;j++){
-      data[i][j] = &ptr[i*size2*size3+j*size3]; 
-    }
-  }
-  */
 
   cellsize = diag * Vector(1./(size1-1), 1./(size2-1), 1./(size3-1));
 
-  /*
-  // get the folder of the header.. data volume is relative to that..
-  size_t pos = headername.find_last_of('/');
-  std::string location = headername.substr(0,pos+1);
-  volumename = location + volumename;
-  // now read in the volume
-  ifstream in(volumename.c_str()); 
-  in.read(reinterpret_cast<char*>(&data[0][0][0]), nx*ny*nz*sizeof(short));
-
-  if(!in){
-    cerr << "Error reading data: " << volumename << '\n';
-    exit(1);
-  }
-  std::cerr << "read " << volumename << std::endl;
-  */
-
   world_stepsize = cellsize.length()/pow(3, 1./3.) * grid_stepsize;
+  std::cerr << "world step size: " << world_stepsize << std::endl;
   cmap.rescale(world_stepsize);
 
-  /*
-  short tmp = 0x1234;
-  string machineendian;
-  if(*reinterpret_cast<char*>(&tmp) == 0x12)
-    machineendian = "BigEndian";
-  else
-    machineendian = "LittleEndian";
-
-  if(machineendian != fileendian){
-    for(int i=0;i<nz;i++){
-      for(int j=0;j<ny;j++){
-        for(int k=0;k<nx;k++){
-          swap(data[k][j][i]);
-          data[k][j][i] += offsetvalue;
-        }
-      }
-    }
-  } else {
-    for(int i=0;i<nz;i++){
-      for(int j=0;j<ny;j++){
-        for(int k=0;k<nx;k++){
-          data[k][j][i] += offsetvalue;
-        }
-      }
-    }
-  }
-  */
 }

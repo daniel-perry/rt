@@ -305,7 +305,8 @@ void runAutomatic()
   if(g_automode)
   {
     // position initial camera position:
-    g_eye = Point(-2, -2, -0.5);
+    //g_eye = Point(-2, -2, -0.5);
+    g_eye = Point(2, -2, -0.5);
     g_lookat = Point(0.5,0, 0.8);
     g_nup = Vector(0, 0, 1);
     syncCamera();
