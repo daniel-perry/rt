@@ -50,6 +50,10 @@ bool g_normFlipped;
 // auto mode:
 bool g_automode = false;
 
+// function declarations:
+void rotateCamera(float pct_x, float pct_y);
+void syncCamera();
+
 void DrawSquare(float x, float y) {
   glBegin(GL_QUADS);
   glVertex2f(0, 0);    glTexCoord2f (0, 0);
@@ -117,11 +121,25 @@ void patience(int value)
   }
 }
 
+
 // what to do when ray tracer is done rendering...
 void doneRendering()
 {
   std::cerr << "done rendering." << std::endl;
   showResult();
+
+  if( g_automode )
+  {
+    if(g_rayTracer->getState() == RayTracer::DONE)
+    {
+      rotateCamera( 0.5, 0 );
+      syncCamera();
+    }
+
+    // try again in 4 seconds..
+    //glutTimerFunc(500, updateAutomatic, 0);
+  }
+
 }
 void reshape(GLint width, GLint height)
 {
@@ -280,7 +298,7 @@ void syncCamera()
   {
     std::cerr << "new eye:" << g_eye << std::endl;
     ph->initialize(g_eye,g_lookat,g_nup,g_theta,g_aspectRatio);
-    glutTimerFunc(500, patience, ++g_patienceValue);
+    glutTimerFunc(400, patience, ++g_patienceValue);
   }
   // else - do nothing
 }
@@ -296,7 +314,7 @@ void updateAutomatic(int value)
     }
 
     // try again in 4 seconds..
-    glutTimerFunc(4000, updateAutomatic, 0);
+    glutTimerFunc(500, updateAutomatic, 0);
   }
 }
 
@@ -306,13 +324,15 @@ void runAutomatic()
   {
     // position initial camera position:
     //g_eye = Point(-2, -2, -0.5);
+    /*
     g_eye = Point(2, -2, -0.5);
     g_lookat = Point(0.5,0, 0.8);
     g_nup = Vector(0, 0, 1);
+    */
     syncCamera();
     
     // start regular intervals of camera rotation:
-    glutTimerFunc(4000, updateAutomatic, 0);
+    //glutTimerFunc(500, updateAutomatic, 0);
   }
 }
 
@@ -387,7 +407,7 @@ void SelectFromMenu(int idCommand)
 }
 void Keyboard(unsigned char key, int x, int y)
 {
-  static const float STEP_SIZE = 1.0;
+  static const float STEP_SIZE = 0.1;
   vector3d right = cross(g_nup,(g_lookat-g_eye).MakeUnitVector());
   switch (key)
   {

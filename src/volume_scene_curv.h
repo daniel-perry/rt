@@ -38,8 +38,8 @@ Scene* make_scene(const std::string & nrrd_fn, const std::string & cmap_fn, floa
                                      10,1));
   scene->setMaxRayDepth(10);
   scene->setMinAttenuation(.01);
-  scene->setSampler( new UniformSample( 1 , scene));
-  //scene->setSampler( new JitteredSample( 9 , scene));
+  //scene->setSampler( new UniformSample( 1 , scene));
+  scene->setSampler( new JitteredSample( 9 , scene));
   scene->setFilter( new BoxFilter() );
 
   return scene;

@@ -75,6 +75,7 @@ private:
   /** convert color to unsigned char and set in buffer.
    */
   void set_color(size_t r, size_t c, const Color &clr);
+  void get_color(size_t r, size_t c, Color &clr);
 
   // holds the scene definition
   Scene * m_scene;

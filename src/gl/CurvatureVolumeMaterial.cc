@@ -285,7 +285,7 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
   smoother->SetInput(reader->GetOutput());
   smoother->SetNumberOfIterations(2);
   smoother->SetConductanceParameter(1.2);
-
+	smoother->SetNumberOfThreads(8);
   try
   {
     smoother->Update();
@@ -305,6 +305,7 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
   GradientFilter::Pointer gradientFilter = GradientFilter::New();
   gradientFilter->SetSigma(1.0);
   gradientFilter->SetInput( data );
+	gradientFilter->SetNumberOfThreads(8);
   gradient = gradientFilter->GetOutput();
   try
   {
@@ -319,6 +320,7 @@ CurvatureVolumeMaterial::CurvatureVolumeMaterial(const std::string& data_fn,
   HessianFilter::Pointer hessianFilter = HessianFilter::New();
   hessianFilter->SetSigma(1.0);
   hessianFilter->SetInput( data );
+	hessianFilter->SetNumberOfThreads(8);
   hessian = hessianFilter->GetOutput();
   try
   {
