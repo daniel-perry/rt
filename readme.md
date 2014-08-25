@@ -1,10 +1,11 @@
 Ray Tracer written for CS6620 at University of Utah in 2005
 
 Updates:
-- December 2012 added (for CS6630)
--- fixed volume rendering
--- added non-photorealistic volume rendering
--- OpenGL/GLUT based viewer with threading
+
+December 2012 added (for CS6630)
+- fixed volume rendering
+- added non-photorealistic volume rendering
+- OpenGL/GLUT based viewer with threading
 
 Features
 - volume rendering
