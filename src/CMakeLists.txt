@@ -186,3 +186,28 @@ TARGET_LINK_LIBRARIES( viewer
                        #${Teem_LIBRARY}
                        ${ITK_LIBRARIES}
                      )
+
+#####################
+# rtvol - commandline volume renderer
+#####################
+
+SET( rtvol_HDRS
+  RayTracer.h
+	gl/image.h
+	gl/rgb.h
+)
+
+SET( rtvol_SRCS
+  rtvol.cc
+)
+
+ADD_EXECUTABLE( rtvol
+                ${rtvol_SRCS}
+				      )
+
+TARGET_LINK_LIBRARIES( rtvol
+                       raytracer
+											 gl
+                       ${CMAKE_THREAD_LIBS_INIT}
+                       ${ITK_LIBRARIES}
+                     )
