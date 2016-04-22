@@ -70,7 +70,9 @@ int main(int argc, char * argv[] )
   float curvThick = atof(argv[6]);
   bool normFlipped = atoi(argv[7]) != 0;
 
-	vector3d eye(-.01,-.01,-.01);
+	//vector3d eye(-.01,-.01,-.01);
+	//vector3d eye(-.1,-.1,-.1);
+	vector3d eye(-.1,-.1,-.1);
 	vector3d lookat(0,0,0);
 	vector3d nup(0,0,1);
 	double theta = 55;

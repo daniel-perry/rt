@@ -7,7 +7,8 @@ Scene* make_scene(const std::string & nrrd_fn, const std::string & cmap_fn, floa
   scene->imageX = 512;
   scene->imageY = 512;
 
-  scene->setBackground(new ConstantBackground(Color(112/255., 204/255., 255./255.)));
+  scene->setBackground(new ConstantBackground(Color(255./255., 255./255., 255./255.)));
+  //scene->setBackground(new ConstantBackground(Color(112/255., 204/255., 255./255.)));
   //scene->setBackground(new ConstantBackground(Color(0./255., 0./255., 0./255.)));
   Group* world = new Group();
 
