@@ -41,6 +41,15 @@ void RayTracer::makeScene(const std::string & nrrd_fn, const std::string & cmap_
   setSize(m_width,m_height);
 }
 
+void RayTracer::makeScene(const std::string & nrrd_fn, float isovalue)
+{
+  m_scene = make_scene(nrrd_fn, cmap_fn, curvThick, normFlipped);
+  m_rc.scene = m_scene;
+  m_scene->m_rc = m_rc;
+  setSize(m_width,m_height);
+}
+
+
 void RayTracer::setSize(int width, int height)
 { 
   m_width = width;

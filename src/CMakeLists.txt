@@ -211,3 +211,28 @@ TARGET_LINK_LIBRARIES( rtvol
                        ${CMAKE_THREAD_LIBS_INIT}
                        ${ITK_LIBRARIES}
                      )
+
+#####################
+# rtiso - commandline volume renderer
+#####################
+
+SET( rtiso_HDRS
+  RayTracer.h
+	gl/image.h
+	gl/rgb.h
+)
+
+SET( rtiso_SRCS
+  rtiso.cc
+)
+
+ADD_EXECUTABLE( rtiso
+                ${rtiso_SRCS}
+				      )
+
+TARGET_LINK_LIBRARIES( rtiso
+                       raytracer
+											 gl
+                       ${CMAKE_THREAD_LIBS_INIT}
+                       ${ITK_LIBRARIES}
+                     )
