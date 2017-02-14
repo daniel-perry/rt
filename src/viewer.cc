@@ -43,10 +43,12 @@ vector3d g_lookat(0,0,0);
 vector3d g_nup(0,0,1);
 double g_theta = 55;
 double g_aspectRatio=1;
-std::string g_nrrd_fn;
+//std::string g_nrrd_fn;
+std::string g_points_fn;
+std::string g_values_fn;
 std::string g_cmap_fn;
-float g_curvThick; 
-bool g_normFlipped;
+//float g_curvThick; 
+//bool g_normFlipped;
 // auto mode:
 bool g_automode = false;
 
@@ -163,7 +165,8 @@ unsigned char *  makeTexture(int width, int height)
    {
      g_rayTracer = new RayTracer(width,height);
      g_rayTracer->setDoneRenderingCB( & doneRendering );
-     g_rayTracer->makeScene( g_nrrd_fn, g_cmap_fn, g_curvThick, g_normFlipped );
+     //g_rayTracer->makeScene( g_nrrd_fn, g_cmap_fn, g_curvThick, g_normFlipped );
+     g_rayTracer->makeScene( g_points_fn, g_values_fn, g_cmap_fn );
    }
    if( !(g_rayTracer->getWidth() == width && g_rayTracer->getHeight() == height) )
    {
@@ -471,10 +474,13 @@ int main(int argc, char** argv)
     exit(1);
   }
 
-  g_nrrd_fn = argv[1];
-  g_cmap_fn = argv[2];
-  g_curvThick = atof(argv[3]);
-  g_normFlipped = atoi(argv[4]) != 0;
+  //g_nrrd_fn = argv[1];
+  //g_cmap_fn = argv[2];
+  g_points_fn = argv[1];
+  g_values_fn = argv[2];
+  g_cmap_fn = argv[3];
+  //g_curvThick = atof(argv[3]);
+  //g_normFlipped = atoi(argv[4]) != 0;
 
   // GLUT Window Initialization:
   glutInit (&argc, argv);

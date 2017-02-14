@@ -58,17 +58,21 @@ int main(int argc, char * argv[] )
 
   if( argc < 2 )
   {
-    std::cerr << "usage: " << argv[0] << " <out_fn> <nrrd_fn> <cmap_fn> <width> <height> <curv-thickness> <norm-flipped>" << std::endl;
+    //std::cerr << "usage: " << argv[0] << " <out_fn> <nrrd_fn> <cmap_fn> <width> <height> <curv-thickness> <norm-flipped>" << std::endl;
+    std::cerr << "usage: " << argv[0] << " <out_fn> <points_fn> <values_fn> <cmap_fn> <width> <height> " << std::endl;
     exit(1);
   }
 
 	out_fn = argv[1];
-  std::string nrrd_fn = argv[2];
-  std::string cmap_fn = argv[3];
-	int width = atoi(argv[4]);
-	int height = atoi(argv[5]);
-  float curvThick = atof(argv[6]);
-  bool normFlipped = atoi(argv[7]) != 0;
+  //std::string nrrd_fn = argv[2];
+  //std::string cmap_fn = argv[3];
+  std::string points_fn = argv[2];
+  std::string values_fn = argv[3];
+  std::string cmap_fn = argv[4];
+	int width = atoi(argv[5]);
+	int height = atoi(argv[6]);
+  //float curvThick = atof(argv[6]);
+  //bool normFlipped = atoi(argv[7]) != 0;
 
 	//vector3d eye(-.01,-.01,-.01);
 	//vector3d eye(-.1,-.1,-.1);
@@ -80,7 +84,8 @@ int main(int argc, char * argv[] )
 
 	rayTracer = new RayTracer(width,height);
 	rayTracer->setDoneRenderingCB( & doneRendering );
-	rayTracer->makeScene( nrrd_fn, cmap_fn, curvThick, normFlipped );
+	//rayTracer->makeScene( nrrd_fn, cmap_fn, curvThick, normFlipped );
+	rayTracer->makeScene( points_fn, values_fn, cmap_fn );
   PinholeCamera * ph = dynamic_cast<PinholeCamera*>(rayTracer->getScene()->camera);
   ph->initialize(eye,lookat,nup,theta,aspectRatio);
   rayTracer->restartRender();

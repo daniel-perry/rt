@@ -23,10 +23,20 @@ include_directories( ${Threads_INCLUDE_DIRS} )
 #find_package(Teem REQUIRED) # version 1.10.0
 #include_directories( ${Teem_INCLUDE_DIRS} )
 
+#FIND_PACKAGE(ITK REQUIRED)
+#IF (ITK_FOUND)
+#  INCLUDE (${USE_ITK_FILE})
+#ENDIF(ITK_FOUND)
 FIND_PACKAGE(ITK REQUIRED)
-IF (ITK_FOUND)
-  INCLUDE (${USE_ITK_FILE})
+IF(ITK_FOUND)
+    INCLUDE_DIRECTORIES(${ITK_INCLUDES})
+    INCLUDE( ${ITK_USE_FILE} ) 
+ELSE(ITK_FOUND)
+    MESSAGE(FATAL_ERROR "ERROR: ITK not found")
 ENDIF(ITK_FOUND)
+
+
+
 
 SET( gl_HDRS
   gl/AxisBox.h

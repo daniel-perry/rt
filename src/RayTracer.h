@@ -30,7 +30,8 @@ public:
 
   /** setup the scene..
    */
-  void makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped );
+  //void makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped );
+  void makeScene(const std::string & points_fn, const std::string & values_fn, const std::string & cmap_fn);
 
   /** update size
    */

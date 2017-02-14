@@ -10,7 +10,8 @@
 //#include "volume_scene_tooth.h"
 //#include "volume_scene_two_dist_curv.h"
 //#include "volume_scene_tooth_curv.h"
-#include "volume_scene_curv.h"
+//#include "volume_scene_curv.h"
+#include "point_scene.h"
 
 RayTracer::RayTracer(int width, int height)
 :m_scene(0),
@@ -33,9 +34,11 @@ RayTracer::~RayTracer()
   if(m_buffer) delete[] m_buffer;
 }
 
-void RayTracer::makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped )
+//void RayTracer::makeScene(const std::string & nrrd_fn, const std::string & cmap_fn, float curvThick, bool normFlipped )
+void RayTracer::makeScene(const std::string & points_fn, const std::string & values_fn, const std::string & cmap_fn )
 {
-  m_scene = make_scene(nrrd_fn, cmap_fn, curvThick, normFlipped);
+  //m_scene = make_scene(nrrd_fn, cmap_fn, curvThick, normFlipped);
+  m_scene = make_scene(points_fn, values_fn, cmap_fn);
   m_rc.scene = m_scene;
   m_scene->m_rc = m_rc;
   setSize(m_width,m_height);
